@@ -15,7 +15,7 @@ a {
 }
 
 body {
-  background-image: url("../IMAGES/PICTURES/login_bg2.jpg");
+  background-image: url("../images/pictures/login_background.jpg");
   /* background-color: #ff0000; */
   background-position: center top;
   background-repeat: no-repeat;
@@ -37,7 +37,7 @@ body {
 }
 
 .logo {
-  width: 200px;
+  width: 150px;
 }
 
 .form-wrapper {
@@ -48,11 +48,14 @@ body {
   align-items: center;
 }
 .form-wrapper .login-text-header {
-  font-size: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  width: 300px;
   color: #ff0000;
 }
 
-.form-item {
+.form-item,
+.remember-me {
   border: none;
   /* border-bottom: 1px solid #ff0000; */
   margin-top: 20px;
@@ -70,7 +73,8 @@ body {
   border: 2px solid #0b5501;
   transition: all 0.3s;
 }
-.form-item span {
+.form-item span,
+.remember-me span {
   color: #ff0000;
   font-size: 1rem;
 }
@@ -88,6 +92,12 @@ input[type="password"] {
   margin-bottom: 3px;
 }
 
+.remember-me {
+  background: none;
+}
+.remember-me input {
+  margin-right: 5px;
+}
 .form-wrapper p {
   text-align: center;
   margin: 10px 0;
@@ -115,7 +125,7 @@ input[type="password"] {
 /* Media queries */
 @media screen and (max-width: 500px) {
   body {
-    background-image: url("../IMAGES/PICTURES/login_bg.jpg");
+    background-image: url("../images/pictures/login_bg.jpg");
   }
 
   input[type="text"],

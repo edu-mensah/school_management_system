@@ -191,7 +191,7 @@ if (isset($_POST['submit'])) {
          $_SESSION['course_id']= $student_data['course_id'];
 
 
-        header("Location:" . ROOTDIR . "/system/student_portal.php");
+        header("Location:" . ROOTDIR . "/system/student_portal_dashborad.php");
         exit();
     }
     $stmt_student = null;
@@ -241,7 +241,7 @@ if (isset($_POST['submit'])) {
 
 
 
-        header("Location:" . ROOTDIR . "/system/instructor_portal.php");
+        header("Location:" . ROOTDIR . "/system/instructor_portal_dashboard.php");
         exit();
     }
     $stmt_instructor = null;
@@ -286,7 +286,7 @@ if (isset($_POST['submit'])) {
 
 
 
-        header("Location:" . ROOTDIR . "/system/admin_portal.php");
+        header("Location:" . ROOTDIR . "/system/admin_portal_dashboard.php");
         exit();
     }
 

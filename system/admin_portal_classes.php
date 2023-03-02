@@ -20,21 +20,6 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
     $stmt_student = $DatabaseConnection->prepare($student_user_select_query);
     $stmt_student->execute();
     $number_of_students = $stmt_student->rowCount();
-    $student_data = $stmt_student->fetch(PDO::FETCH_ASSOC);
-
-
-// ########################
-    $male_student_query = "SELECT * FROM `students` WHERE gender = 'male'";
-    $stmt_male_student = $DatabaseConnection->prepare($male_student_query);
-    $stmt_male_student->execute();
-    $number_of_male_students = $stmt_male_student->rowCount();
-
-// ########################
-    $female_student_query = "SELECT * FROM `students` WHERE gender = 'female'";
-    $stmt_female_student = $DatabaseConnection->prepare($female_student_query);
-    $stmt_female_student->execute();
-    $number_of_female_students = $stmt_female_student->rowCount();
-    
 
 
 // Instructors Data
@@ -93,7 +78,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
             </div>
             <div class="side-bar-functions-wrapper">
                 <ul class="side-bar-links">
-                    <li id="active-link">
+                    <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="admin_portal_dashboard.php">Dashboard</a></span>
                     </li>
                     <li> 
@@ -108,17 +93,17 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php">Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
-                    <li>
+                    <li id="active-link">
                          <span><i class="fas fa-dice"></i> <a href="admin_portal_classes.php">Classes</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php">Fees and Payment</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php">Fees and Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="admin_portal_books.php">Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-bullhorn"></i> <a href="admin_portal_notice.php">Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-bull-horn"></i> <a href="admin_portal_notice.php">Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
                          <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php">Assessments</a></span></i>
@@ -131,60 +116,19 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
         </div>
 
 
-
-
-
         <div class="dashboah-content-wrapper">
             <div class="date-bar-wrapper">
                 <p class="dashboard-text">
-                    Dashboard
+                    Classes
                 </p>
                 <p class="date-text"></p>
             </div>
-            <div class="dashboard-card-wrapper">
-                <div class="">
-                    <p class="number"><?= $number_of_instructors ?></p>
-                    <p class="text">INSTRUCTORS</p>
-                </div>
-                <div class="light-blue">
-                    <p class="number"><?= $number_of_students ?></p>
-                    <p class="text">STUDENTS</p>
-                </div>
-                <div class="green">
-                    <p class="number"><?= $number_of_courses ?></p>
-                    <p class="text">COURSES</p>
-                </div>
-                <div class="red">
-                    <p class="number"><?= $number_of_batches ?></p>
-                    <p class="text">BATCHES</p>
-                </div>
-                <div class="purple">
-                    <p class="number"><?= $number_of_classes ?></p>
-                    <p class="text">CLASSES</p>
-                </div>
-                <div class="red">
-                    <p class="number">203</p>
-                    <p class="text">BOOKS IN STOCK</p>
-                </div>
-                <div class="green">
-                    <p class="number">GHc 4050.00</p>
-                    <p class="text">FEES OWED</p>
-                </div>
-                <div class="purple">
-                    <p class="number"> GHc 8022.24</p>
-                    <p class="text">FEES PAID</p>
-                </div>
-                 <div class="light-blue">
-                    <p class="number"><?=  $number_of_female_students ?></p>
-                    <p class="text">FEMALE STUDENTS</p>
-                </div>
-                 <div class="">
-                    <p class="number"><?=  $number_of_male_students ?></p>
-                    <p class="text">MALE STUDENTS</p>
-                </div>
-            </div>
-            
         </div>
+
+
+
+
+        
 
 
 

@@ -37,7 +37,10 @@ body {
 }
 
 .logo {
-  width: 150px;
+  width: 160px;
+}
+.logo img {
+  border-radius: 100px;
 }
 
 .form-wrapper {
@@ -120,6 +123,11 @@ input[type="password"] {
 }
 .form-submit input:hover {
   box-shadow: 0 0 20px 2px #ff0000a4;
+}
+
+#error-message,
+#password-error {
+  margin: 0 0 -10px 0;
 }
 
 /* Media queries */

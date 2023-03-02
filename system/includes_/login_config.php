@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 
     
     if ($loginData->isEmailEmpty()) {
-        header("Location:" . ROOTDIR . "/index.php?error=Please enter your email.&$user_data");
+        header("Location:" . ROOTDIR . "/index.php?email_error=Please enter your email or ID.&$user_data");
         exit();
     }
 
@@ -224,7 +224,7 @@ if (isset($_POST['submit'])) {
 
          session_start();
         //  instructor personal details
-         $_SESSION['institutional_id'] = $instructor_data['institutional_id'];
+         $_SESSION['instructor_id'] = $instructor_data['institutional_id'];
          $_SESSION['first_name'] = $instructor_data['first_name'];
          $_SESSION['last_name'] = $instructor_data['last_name'];
          $_SESSION['other_names'] = $instructor_data['others_names'];
@@ -262,9 +262,9 @@ if (isset($_POST['submit'])) {
     if ($stmt_admin->rowCount() > 0) {
         $admin_data = $stmt_admin->fetch(PDO::FETCH_ASSOC);
 
-        $check_password = password_verify($password,$admin_data['pass_word']);
+        $check_password = $admin_data['pass_word'] == $password;   //password_verify($password,$admin_data['pass_word']);
 
-        if (false /*!$check_password*/) {
+        if (!$check_password) {
               header("Location:" . ROOTDIR . "/index.php?error=Wrong password.&$user_data");
                  exit();
          }
@@ -300,7 +300,7 @@ if (isset($_POST['submit'])) {
 
 
     //  ############## The user id  or the email did match any data ##################
-    header("Location:" . ROOTDIR . "/index.php?error=Invalid email or ID.&$user_data");
+    header("Location:" . ROOTDIR . "/index.php?email_error=Invalid email or ID.&$user_data");
     exit();
 
 

@@ -9,7 +9,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['student_id'])){
     exit();
 }
 
-    require_once 'portal_header.php';
+    require_once '../portal_header.php';
 
 ?>
 
@@ -38,5 +38,5 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['student_id'])){
 
 
 <?php 
-    require_once 'portal_footer.php';
+    require_once '../portal_footer.php';
  ?>

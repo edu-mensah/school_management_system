@@ -22,11 +22,11 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 
 
 // the DBconnection
-require_once 'database_connection.php';
+require_once '../database_connection/database_connection.php';
 // all function
-require_once 'functions.php';
+require_once '../functions/functions.php';
 // class
-require_once 'classes/loginClass.php';
+require_once '../classes/loginClass.php';
 
 
 // Defining variables and initializing with empty values
@@ -99,80 +99,7 @@ if (isset($_POST['submit'])) {
                  exit();
          } 
 
-/*
-         
-        //  getting the student course
-         $course_query = "SELECT * FROM `courses` WHERE couse_id = :course_id";
-         $student_course_data = $DatabaseConnection->prepare($course_query);
-         $student_course_data->execute(['course_id' => $student_data['course_id']]);
 
-        //  fetch data
-        $std_course = $student_course_data->fetch(PDO::FETCH_ASSOC);
-
-        
-
-        //  getting the student instructor
-         $instructor_query = "SELECT  * FROM `instructors` WHERE couse_id = :course_id";
-         $student_instructor_data = $DatabaseConnection->prepare($instructor_query);
-         $student_instructor_data->execute(['course_id' => $student_data['course_id']]);
-
-        //  fetch data
-        $std_instructor = $student_instructor_data->fetch(PDO::FETCH_ASSOC);
-
-
-         
-
-
-        // getting student asssessments
-        $assessment_query = "SELECT  * FROM `assessments` WHERE student_id = :student_id";
-         $student_assessment_data = $DatabaseConnection->prepare($assessment_query);
-         $student_assessment_data->execute(['student_id' => $student_data['student_id']]);
-
-        //  fetch data
-        $std_assessment = $student_assessment_data->fetch(PDO::FETCH_ASSOC);
-
-
-
-        // getting student assigned books
-         $assigned_query = "SELECT `book_id`, `assigned_date` FROM `assigned_books` WHERE student_id = :student_id";
-         $student_assigned_data = $DatabaseConnection->prepare($assigned_query);
-         $student_assigned_data->execute(['student_id' => $student_data['student_id']]);
-
-        //  fetch data
-        $std_assigned = $student_assigned_data->fetch(PDO::FETCH_ASSOC);
-
-
-
-        // getting student assigned books title
-        $book_query = "SELECT * FROM `books` WHERE book_id = :book_id";
-         $student_book_data = $DatabaseConnection->prepare($book_query);
-         $student_book_data->execute(['book_id' => $std_assigned['book_id']]);
-
-        //  fetch data
-        $std_book = $student_book_data->fetch(PDO::FETCH_ASSOC);
-
-
-
-
-        // getting student class
-        $class_query = "SELECT * FROM `class` WHERE class_id = :class_id";
-         $student_class_data = $DatabaseConnection->prepare($class_query);
-         $student_class_data->execute(['class_id' => $student_data['class_id']]);
-
-        //  fetch data
-        $std_class = $student_class_data->fetch(PDO::FETCH_ASSOC);
-
-
-
-        // getting student batch
-        $batch_query = "SELECT * FROM `batches` WHERE batch_id = :batch_id";
-         $student_batch_data = $DatabaseConnection->prepare($batch_query);
-         $student_batch_data->execute(['batch_id' => $student_data['batch_id']]);
-
-        //  fetch data
-        $std_book = $student_book_data->fetch(PDO::FETCH_ASSOC);
-
-*/
         
          session_start();
         //  student personal details
@@ -204,11 +131,11 @@ if (isset($_POST['submit'])) {
     // #########################################  Instructor Login config ########################
 
 
-    $instructor_user_select_query = "SELECT * FROM `instructors` WHERE email = :email || institutional_id = :institutionalId";
+    $instructor_user_select_query = "SELECT * FROM `instructors` WHERE email = :email || instructor_id = :instructorId";
 
     // Statement instructor
     $stmt_instructor = $DatabaseConnection->prepare($instructor_user_select_query);
-    $stmt_instructor->execute(['email' => $email_or_id, 'institutionalId' => $email_or_id]);
+    $stmt_instructor->execute(['email' => $email_or_id, 'instructorId' => $email_or_id]);
 
 
     if ($stmt_instructor->rowCount() > 0) {
@@ -224,7 +151,7 @@ if (isset($_POST['submit'])) {
 
          session_start();
         //  instructor personal details
-         $_SESSION['instructor_id'] = $instructor_data['institutional_id'];
+         $_SESSION['instructor_id'] = $instructor_data['instructor_id'];
          $_SESSION['first_name'] = $instructor_data['first_name'];
          $_SESSION['last_name'] = $instructor_data['last_name'];
          $_SESSION['other_names'] = $instructor_data['others_names'];
@@ -235,8 +162,7 @@ if (isset($_POST['submit'])) {
          $_SESSION['res_address'] = $instructor_data['res_address'];
          $_SESSION['ssnit_number'] = $instructor_data['ssnit_number'];
          $_SESSION['course_id'] = $instructor_data['course_id'];
-        //  $_SESSION['class_id'] = $instructor_data['class_id'];
-        //  $_SESSION['course_id']= $instructor_data['course_id'];
+        
 
 
 
@@ -253,10 +179,10 @@ if (isset($_POST['submit'])) {
 
     // #########################################  Admin Login config ########################
 
-    $admin_user_select_query = "SELECT * FROM `administrators` WHERE email = :email || institutional_id = :institutionalId";
+    $admin_user_select_query = "SELECT * FROM `administrators` WHERE email = :email || admin_id = :adminId";
 
     $stmt_admin = $DatabaseConnection->prepare($admin_user_select_query);
-    $stmt_admin->execute(['email' => $email_or_id, 'institutionalId' => $email_or_id]);
+    $stmt_admin->execute(['email' => $email_or_id, 'adminId' => $email_or_id]);
 
 
     if ($stmt_admin->rowCount() > 0) {
@@ -272,7 +198,7 @@ if (isset($_POST['submit'])) {
 
           session_start();
         //  Admin personal details
-         $_SESSION['institutional_id'] = $admin_data['institutional_id'];
+         $_SESSION['admin_id'] = $admin_data['admin_id'];
          $_SESSION['first_name'] = $admin_data['first_name'];
          $_SESSION['last_name'] = $admin_data['last_name'];
          $_SESSION['other_names'] = $admin_data['others_names'];

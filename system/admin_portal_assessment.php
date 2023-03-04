@@ -4,13 +4,13 @@ session_start();
 
 
 // Checking if the user is already logged in, if yes then redirect him to welcome page
-if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
+if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
     header("Location:" . ROOTDIR . "/index.php");
     exit();
 }
 
-    require_once 'portal_header.php';
-    require_once 'includes_/database_connection.php';
+    require_once 'admin_portal_header.php';
+    require_once 'database_connection/database_connection.php';
 
 
 
@@ -63,13 +63,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                    <?php 
-                        if (strtolower($_SESSION['gender']) == 'female') {
-                            echo '<img src="images/uploads/female_avatar.svg" alt="profile picture">';
-                        } elseif (strtolower($_SESSION['gender']) == 'male') {
-                            echo '<img src="images/uploads/male_avatar.svg" alt="profile picture">';
-                        }
-                    ?>
+                    <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>
@@ -79,37 +73,37 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
             <div class="side-bar-functions-wrapper">
                 <ul class="side-bar-links">
                     <li>
-                         <span><i class="fas fa-tachometer-alt"></i> <a href="admin_portal_dashboard.php">Dashboard</a></span>
+                         <span><i class="fas fa-tachometer-alt"></i> <a href="admin_portal_dashboard.php"> Dashboard</a></span>
                     </li>
                     <li> 
-                        <span> <i class="fas fa-users"></i> <a href="admin_portal_instructors.php">Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span> <i class="fas fa-users"></i> <a href="admin_portal_instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li> 
-                        <span><i class="fas fa-user-graduate"></i> <a href="admin_portal_students.php">Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-user-graduate"></i> <a href="admin_portal_students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-clone"></i> <a href="admin_portal_courses.php">Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span> <i class="fas fa-clone"></i> <a href="admin_portal_courses.php"> Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php">Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-dice"></i> <a href="admin_portal_classes.php">Classes</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-dice"></i> <a href="admin_portal_classes.php"> Classes</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php">Fees and Payments</a></span>  <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php"> Fees and Payments</a></span>  <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-book"></i> <a href="admin_portal_books.php">Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-book"></i> <a href="admin_portal_books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-bullhorn"></i> <a href="admin_portal_notice.php">Notice</a></span>  <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-bullhorn"></i> <a href="admin_portal_notice.php"> Notice</a></span>  <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li id="active-link">
-                         <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php">Assessments</a></span></i>
+                         <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php"> Assessments</a></span></i>
                     </li>
                     <li>
-                        <span> <i class="fas fa-cog"></i> Settings</span> 
+                        <span> <i class="fas fa-cog"></i> <a href="admin_portal_settings.php"> Settings</a></span> 
                     </li>
                 </ul>
             </div>
@@ -140,5 +134,5 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['institutional_id'])){
 
 
     <?php 
-    require_once 'portal_footer.php';
+    require_once 'admin_portal_footer.php';
     ?>

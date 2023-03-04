@@ -85,7 +85,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                     <li>
                          <span> <i class="fas fa-clone"></i> <a href="admin_portal_courses.php"> Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
-                    <li id="active-link">
+                    <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
@@ -103,7 +103,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                     <li>
                          <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php"> Assessments</a></span></i>
                     </li>
-                    <li>
+                    <li id="active-link">
                         <span> <i class="fas fa-cog"></i> <a href="admin_portal_settings.php"> Settings</a></span> 
                     </li>
                 </ul>
@@ -116,7 +116,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="dashboah-content-wrapper">
                 <div class="date-bar-wrapper">
                     <p class="dashboard-text">
-                        Batches
+                        Settings
                     </p>
                     <p class="date-text"></p>
                 </div>

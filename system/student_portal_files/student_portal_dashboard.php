@@ -4,12 +4,12 @@ session_start();
 
 
 // Checking if the user is already logged in, if yes then redirect him to welcome page
-if(!isset($_SESSION["email"]) && !isset($_SESSION['instructor_id'])){
+if(!isset($_SESSION["email"]) && !isset($_SESSION['student_id'])){
     header("Location:" . ROOTDIR . "/index.php");
     exit();
 }
 
-    require_once 'portal_header.php';
+    require_once 'student_portal_header.php';
 
 ?>
 
@@ -38,5 +38,5 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['instructor_id'])){
 
 
 <?php 
-    require_once 'portal_footer.php';
+    require_once 'student_portal_footer.php';
  ?>

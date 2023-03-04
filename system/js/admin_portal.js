@@ -41,3 +41,9 @@ const monthsOfTheYear = [
 dashboardTime.textContent = `${
   daysOfTheWeek[dayofTheWeek - 1]
 }, ${dayOfTheMonth} ${monthsOfTheYear[monthOfTheYear]} ${numberOfTheYear}`;
+
+//
+
+// toggle
+
+//

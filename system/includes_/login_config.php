@@ -3,7 +3,6 @@
 session_start();
 
 define("ROOTDIR", dirname("/school_management_system/system"));
-// define("ROOTDIR", "school_management_system");
 
 // Checking if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){

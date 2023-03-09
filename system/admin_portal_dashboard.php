@@ -86,7 +86,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                   <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
+                   <img src="images/uploads/<?= $_SESSION['admin_id'] ?>.jpg" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>
@@ -185,6 +185,84 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                     <p class="text">MALE STUDENTS</p>
                 </div>
             </div>
+
+            <div class="student-and-instructor-list">
+                <div class="instructor-list">
+                    <h2>INSTRUCTORS</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>INSTRUCTOR ID</th>
+                                <th>FULL NAME</th>
+                                <th>EMIAL</th>
+                                <th>PHONE</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>in20001</td>
+                            <td>Edu Mensah</td>
+                            <td>e@gmail.com</td>
+                            <td>0245367895</td>
+                        </tr>
+                        <tr>
+                            <td>in20011</td>
+                            <td>Kwame Romio</td>
+                            <td>kwame@gmail.com</td>
+                            <td>0245364495</td>
+                        </tr>
+                        <tr>
+                            <td>in20021</td>
+                            <td>Kofi Blay</td>
+                            <td>kwame@yahoo.com</td>
+                            <td>0545364495</td>
+                        </tr>
+                        <tr>
+                            <td>in20002</td>
+                            <td>Kwame Romio</td>
+                            <td>k@gmail.com</td>
+                            <td>0245364495</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="student-list">
+                    <h2>STUDENTS</h2>
+                    <table>
+                    <thead>
+                        <tr>
+                            <th>STUDENT ID</th>
+                            <th>FULL NAME</th>
+                            <th>EMIAL</th>
+                            <th>PHONE</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>st20001</td>
+                        <td>Edu Mensah</td>
+                        <td>e@gmail.com</td>
+                        <td>0245367895</td>
+                    </tr>
+                    <tr>
+                        <td>st20011</td>
+                        <td>Kwame Romio</td>
+                        <td>kwame@gmail.com</td>
+                        <td>0245364495</td>
+                    </tr>
+                    <tr>
+                        <td>st20021</td>
+                        <td>Kofi Blay</td>
+                        <td>kwame@yahoo.com</td>
+                        <td>0545364495</td>
+                    </tr>
+                    <tr>
+                        <td>st20002</td>
+                        <td>Kwame Romio</td>
+                        <td>k@gmail.com</td>
+                        <td>0245364495</td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
             
         </div>
 

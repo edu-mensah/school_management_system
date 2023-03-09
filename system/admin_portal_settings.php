@@ -64,7 +64,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                   <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
+                   <img src="images/uploads/<?= $_SESSION['admin_id'] ?>.jpg" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>

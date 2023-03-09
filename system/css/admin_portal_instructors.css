@@ -32,7 +32,7 @@
 
 .form-main-wrapper {
   width: 70%;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 .form-main-wrapper form {
   display: flex;
@@ -41,7 +41,6 @@
 
 .form-main-wrapper form .form-left-section-wrapper,
 .form-main-wrapper form .form-right-section-wrapper {
-  /* border: 2px solid #ff0000; */
   width: 48%;
 }
 

@@ -13,6 +13,7 @@ define("ROOTDIR", dirname("/school_management_system/system"));
     <title>admin portal</title>
     <!-- custom styling -->
     <link rel="stylesheet" href="css/admin_portal.css?v=<?= time();?>">
+    <link rel="stylesheet" href="css/admin_portal_dashboard.css?v=<?= time();?>">
     <link rel="stylesheet" href="css/admin_portal_instructors.css?v=<?= time();?>">
     <link rel="stylesheet" href="css/admin_portal_courses.css?v=<?= time();?>">
 

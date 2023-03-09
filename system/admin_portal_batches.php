@@ -32,7 +32,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
     // courses Data
-    $course_user_select_query = "SELECT * FROM `instructors`";
+    $course_user_select_query = "SELECT * FROM `courses`";
 // Statement courses
     $stmt_course = $DatabaseConnection->prepare($course_user_select_query);
     $stmt_course->execute();
@@ -40,7 +40,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
     // Batches Data
-    $batch_user_select_query = "SELECT * FROM `instructors`";
+    $batch_user_select_query = "SELECT * FROM `batches`";
 // Statement Instructor
     $stmt_batch = $DatabaseConnection->prepare($batch_user_select_query);
     $stmt_batch->execute();
@@ -49,7 +49,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
     // classes Data
-    $class_user_select_query = "SELECT * FROM `instructors`";
+    $class_user_select_query = "SELECT * FROM `classes`";
 // Statement Instructor
     $stmt_class = $DatabaseConnection->prepare($class_user_select_query);
     $stmt_class->execute();
@@ -64,7 +64,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                   <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
+                   <img src="images/uploads/<?= $_SESSION['admin_id'] ?>.jpg" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>
@@ -114,12 +114,120 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
         <div class="dashboah-content-wrapper">
-                <div class="date-bar-wrapper">
-                    <p class="dashboard-text">
-                        Batches
-                    </p>
-                    <p class="date-text"></p>
+            <div class="date-bar-wrapper">
+                <p class="dashboard-text">
+                    Batches
+                </p>
+                <p class="date-text"></p>
+            </div>
+
+
+
+            <div class="batch-form-wrapper">
+                <div class="form-header">
+                    <h2>Batch Form</h2>
+                    <p>All fields are required</p>
                 </div>
+                <form action="./includes_/add_course_config.php" method="post">
+
+                    <?php  
+                        if (isset($_GET['batch_id_error'])) { ?>
+                        <div class="form-item">
+                            <input type="text" name="batch_id" autocomplete="off" placeholder="Batch ID">
+                            <span><i class="fab fa-orcid" ></i></span>
+                        </div>
+                        <p><?= $_GET['batch_id_error'] ?> </p>
+                    <?php  } elseif (isset($_GET['batch_id'])) { ?>
+                        <div class="form-item">
+                            <input type="text" name="batch_id" value="<?= $_GET['batch_id'] ?>" autocomplete="off" placeholder="Batch ID">
+                        </div>
+                    <?php } ?> 
+                    
+                    <div class="form-item">
+                        <input type="text" name="batch_id" autocomplete="off" placeholder="Batch ID">
+                        <span><i class="fab fa-orcid" ></i></span>
+                    </div>
+
+                    <!--  -->
+
+                    <?php  
+                        if (isset($_GET['start_date_error'])) { ?>
+                        <div class="form-item">
+                            <input type="date" name="start_date" autocomplete="off" placeholder="Start Date">
+                            <span><i class="fas fa-calendar" ></i></span>
+                        </div>
+                        <p><?= $_GET['start_date_error'] ?> </p>
+
+
+                    <?php  } elseif (isset($_GET['start_date'])) { ?>
+                        <div class="form-item">
+                            <input type="date" name="start_date" value="<?= $_GET['start_date'] ?>" autocomplete="off" placeholder="Start Date">
+                            <span><i class="fas fa-calendar" ></i></span>
+                        </div>
+                    <?php } ?> 
+
+
+                    <div class="form-item">
+                        <input type="date" name="start_date" autocomplete="off" placeholder="Start Date">
+                        <span><i class="fas fa-calendar" ></i></span>
+                    </div>
+
+                    <!--  -->
+                    <?php  
+                        if (isset($_GET['end_date_error'])) { ?>
+                        <div class="form-item">
+                            <input type="date" name="end_date" autocomplete="off" placeholder="End Date">
+                            <span><i class="fas fa-calendar" ></i></span>
+                        </div>
+                        <p><?= $_GET['end_date_error'] ?> </p>
+
+
+                    <?php  } elseif (isset($_GET['end_date'])) { ?>
+                        <div class="form-item">
+                            <input type="date" name="end_date" value="<?= $_GET['end_date'] ?>" autocomplete="off" placeholder="End Date">
+                            <span><i class="fas fa-calendar" ></i></span>
+                        </div>
+                    <?php } ?> 
+
+                    <div class="form-item">
+                        <input type="date" name="end_date" autocomplete="off" placeholder="End Date">
+                        <span><i class="fas fa-calendar" ></i></span>
+                    </div>
+
+                    <!--  -->
+                     <?php  
+                        if (isset($_GET['instructor_id_error'])) { ?>
+                        <div class="form-item">
+                            <select name="instructor_id" id="">
+                                <option value="">Asign an Insructor</option>
+                                <option value="ins2001">Kwame Engine</option>
+                            </select>
+                            <span><i class="fas fa-user-alt" ></i></span>
+                        </div>
+                        <p><?= $_GET['instructor_id_error'] ?> </p>
+                    <?php } ?>
+
+                    <div class="form-item">
+                        <select name="instructor_id" id="">
+                            <option value="">Asign an Insructor</option>
+                            <option value="ins2001">Kwame Engine</option>
+                        </select>
+                        <span><i class="fas fa-user-alt" ></i></span>
+                    </div>
+
+
+
+                    <!--  -->
+
+                    <div class="form-item" id="form-submit">
+                        <input type="submit" name="submit" value="SEND">
+                    </div>
+                </form>
+            </div>
+
+
+
+
         </div>
 
 

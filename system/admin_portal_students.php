@@ -64,7 +64,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                   <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
+                   <img src="images/uploads/<?= $_SESSION['admin_id'] ?>.jpg" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>
@@ -128,7 +128,50 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                 <a href="#student-form"><i class="fas fa-plus"></i> Add Student</a>
             </div>
 
+            <!--  -->
 
+            <div class="student-list-wrapper">
+                <div class="">
+                    <h3>All Students</h3>
+                </div>
+                <table>
+                     <thead>
+                            <tr>
+                                <th>INSTRUCTOR ID</th>
+                                <th>FULL NAME</th>
+                                <th>EMIAL</th>
+                                <th>PHONE</th>
+                                <th>BATCH</th>
+                                <th>COURSE</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>st20001</td>
+                            <td>Edu Mensah</td>
+                            <td>e@gmail.com</td>
+                            <td>0245367895</td>
+                        </tr>
+                        <tr>
+                            <td>st20011</td>
+                            <td>Kwame Romio</td>
+                            <td>kwame@gmail.com</td>
+                            <td>0245364495</td>
+                        </tr>
+                        <tr>
+                            <td>st20021</td>
+                            <td>Kofi Blay</td>
+                            <td>kwame@yahoo.com</td>
+                            <td>0545364495</td>
+                        </tr>
+                        <tr>
+                            <td>st20002</td>
+                            <td>Kwame Romio</td>
+                            <td>k@gmail.com</td>
+                            <td>0245364495</td>
+                        </tr>
+                </table>
+            </div>
 
             <!--  -->
 
@@ -174,7 +217,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                         
 
                         <div class="form-item">
-                        <input type="text" name="birth_date" autocomplete="off" placeholder="Date of Birth (1995-05-20) ">
+                        <input type="date" name="birth_date" autocomplete="off" placeholder="Date of Birth ">
                         <span><i class="fas fa-calendar" ></i></span>
                         </div>
 
@@ -195,7 +238,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                         </div>
 
                         <div class="form-item">
-                            <select>
+                            <select name="batch_id">
                                 <option value="">Add to a Batch</option>
                                 <option value="">20 - 23</option>
                                 <option value="">20 - 23</option>
@@ -217,7 +260,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
                         <div class="form-item">
-                            <select>
+                            <select name="course_id">
                                 <option value="">Select a course</option>
                                 <option value="">GRWD</option>
                                 <option value="">SE</option>
@@ -236,7 +279,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
                         <div class="form-item">
                         <input type="password" name="confirm_password" autocomplete="off" placeholder="Confirm Password">
-                        <span><i class="fas fa-phone" ></i></span>
+                        <span><i class="fas fa-lock" ></i></span>
                         </div>
 
 

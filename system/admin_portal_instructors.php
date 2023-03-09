@@ -64,7 +64,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
         <div class="side-bar-wrapper">
             <div class="personal-details-wrapper">
                 <div class="profile-pic-wrapper">
-                    <img src="images/uploads/<?= 'male_avatar.svg' ?>" alt="profile picture">
+                    <img src="images/uploads/<?= $_SESSION['admin_id'] ?>.jpg" alt="profile picture">
                 </div>
                 <div class="profile-name-wrapper">
                     <p><?= $_SESSION['last_name'] ?></p>
@@ -74,37 +74,47 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
             <div class="side-bar-functions-wrapper">
                 <ul class="side-bar-links">
                     <li>
-                         <span><i class="fas fa-tachometer-alt"></i> <a href="admin_portal_dashboard.php"> Dashboard</a></span>
+                        <span><i class="fas fa-tachometer-alt"></i> <a href="admin_portal_dashboard.php">
+                                Dashboard</a></span>
                     </li>
-                    <li id="active-link"> 
-                        <span> <i class="fas fa-users"></i> <a href="admin_portal_instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
-                    </li>
-                    <li> 
-                        <span><i class="fas fa-user-graduate"></i> <a href="admin_portal_students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
-                    </li>
-                    <li>
-                         <span> <i class="fas fa-clone"></i> <a href="admin_portal_courses.php">Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                    <li id="active-link">
+                        <span> <i class="fas fa-users"></i> <a href="admin_portal_instructors.php">
+                                Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-user-graduate"></i> <a href="admin_portal_students.php">
+                                Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-dice"></i> <a href="admin_portal_classes.php"> Classes</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span> <i class="fas fa-clone"></i> <a href="admin_portal_courses.php">Courses</a></span>
+                        <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php"> Fees and Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span> <i class="fas fa-calendar-alt"></i> <a href="admin_portal_batches.php">
+                                Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-book"></i> <a href="admin_portal_books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-dice"></i> <a href="admin_portal_classes.php"> Classes</a></span>
+                        <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span><i class="fas fa-bullhorn"></i> <a href="admin_portal_notice.php"> Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-cedi-sign"></i> <a href="admin_portal_fees.php"> Fees and Payments</a>
+                        </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php"> Assessments</a></span></i>
+                        <span><i class="fas fa-book"></i> <a href="admin_portal_books.php"> Books</a></span>
+                        <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                        <span> <i class="fas fa-cog"></i> <a href="admin_portal_settings.php"> Settings</a></span> 
+                        <span><i class="fas fa-bullhorn"></i> <a href="admin_portal_notice.php"> Notice</a></span>
+                        <!-- <i class="fas fa-chevron-down"></i> -->
+                    </li>
+                    <li>
+                        <span> <i class="fas fa-check-double"></i> <a href="admin_portal_assessment.php">
+                                Assessments</a></span></i>
+                    </li>
+                    <li>
+                        <span> <i class="fas fa-cog"></i> <a href="admin_portal_settings.php"> Settings</a></span>
                     </li>
                 </ul>
             </div>
@@ -119,7 +129,7 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                 </p>
                 <p class="date-text"></p>
             </div>
-            
+
             <!--  -->
 
 
@@ -134,120 +144,159 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
 
 
 
-            <div class="list-of-instructors-wrapper">
-                <div class="list-header-wrapper">
-                    
+            <div class="instructor-list-wrapper">
+                <div class="">
+                    <h3>All Instructors</h3>
                 </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>INSTRUCTOR ID</th>
+                            <th>FULL NAME</th>
+                            <th>EMIAL</th>
+                            <th>PHONE</th>
+                            <th>HIRE DATE</th>
+                            <th>COURSE</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>in20001</td>
+                        <td>Edu Mensah</td>
+                        <td>e@gmail.com</td>
+                        <td>0245367895</td>
+                    </tr>
+                    <tr>
+                        <td>in20011</td>
+                        <td>Kwame Romio</td>
+                        <td>kwame@gmail.com</td>
+                        <td>0245364495</td>
+                    </tr>
+                    <tr>
+                        <td>in20021</td>
+                        <td>Kofi Blay</td>
+                        <td>kwame@yahoo.com</td>
+                        <td>0545364495</td>
+                    </tr>
+                    <tr>
+                        <td>in20002</td>
+                        <td>Kwame Romio</td>
+                        <td>k@gmail.com</td>
+                        <td>0245364495</td>
+                    </tr>
+                </table>
             </div>
-            
+
             <div class="form-main-wrapper" id="instructor-form">
                 <div class="form-header-wrapper">
                     <h2>Intructor Form</h2>
                     <p>All fields are required</p>
                 </div>
-                <form  action="includes_/intructor_register_config.php" method="post">
+                <form action="includes_/intructor_register_config.php" method="post" enctype="multipart/form-data">
                     <div class="form-left-section-wrapper">
+                        <!-- <div class="form-item">
+                            <input type="text" name="instructor_id" autocomplete="off" placeholder="Instructor ID">
+                            <span><i class="fas fa-star"></i></span>
+                        </div> -->
+
                         <div class="form-item">
-                        <input type="text" name="instructor_id" autocomplete="off" placeholder="Instructor ID">
-                        <span><i class="fas fa-star" ></i></span>
-                        </div>
-
-                         <div class="form-item">
-                        <input type="text" name="first_name" autocomplete="off" placeholder="First Name">
-                        <span><i class="fas fa-user-alt" ></i></span>
-                        </div>
-
-                         <div class="form-item">
-                        <input type="text" name="last_name" autocomplete="off" placeholder="Last Name">
-                        <span><i class="fas fa-user-alt" ></i></span>
-                        </div>
-
-
-                         <div class="form-item">
-                        <input type="text" name="other_names" autocomplete="off" placeholder="Other Names (optional)">
-                        <span><i class="fas fa-user-alt" ></i></span>
-                        </div>
-
-                         <div class="form-item">
-                        <input type="text" name="email" autocomplete="off" placeholder="example@example.com">
-                        <span><i class="fas fa-envelope" ></i></span>
+                            <input type="text" name="first_name" autocomplete="off" placeholder="First Name">
+                            <span><i class="fas fa-user-alt"></i></span>
                         </div>
 
                         <div class="form-item">
-                        <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752">
-                        <span><i class="fas fa-phone" ></i></span>
-                        </div>
-                        
-
-                        <div class="form-item">
-                        <input type="text" name="birth_date" autocomplete="off" placeholder="Date of Birth (1995-05-20)">
-                        <span><i class="fas fa-calendar" ></i></span>
+                            <input type="text" name="last_name" autocomplete="off" placeholder="Last Name">
+                            <span><i class="fas fa-user-alt"></i></span>
                         </div>
 
 
                         <div class="form-item">
-                        <input type="text" name="res_address" autocomplete="off" placeholder="Residential Address">
-                        <span><i class="fas fa-map-marker-alt" ></i></span>
+                            <input type="text" name="other_names" autocomplete="off"
+                                placeholder="Other Names (optional)">
+                            <span><i class="fas fa-user-alt"></i></span>
                         </div>
-                        
 
                         <div class="form-item">
-                        <input type="text" name="hire_date" autocomplete="off" placeholder=" Hire Date (2014-11-26)">
-                        <span><i class="fas fa-calendar" ></i></span>
+                            <input type="text" name="email" autocomplete="off" placeholder="example@example.com">
+                            <span><i class="fas fa-envelope"></i></span>
+                        </div>
+
+                        <div class="form-item">
+                            <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752">
+                            <span><i class="fas fa-phone"></i></span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <input type="date" name="birth_date" autocomplete="off" placeholder="Date of Birth">
+                            <span><i class="fas fa-calendar"></i></span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <input type="text" name="res_address" autocomplete="off" placeholder="Residential Address">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <input type="date" name="hire_date" autocomplete="off" placeholder=" Hire Date">
+                            <span><i class="fas fa-calendar"></i></span>
                         </div>
                     </div>
 
                     <!--  -->
                     <div class="form-right-section-wrapper">
-                        
 
-                         <div class="form-item">
-                        <input type="text" name="ssnit_number" autocomplete="off" placeholder="SSNIT Number">
-                        <span><i class="fas fa-user-alt" ></i></span>
+
+                        <div class="form-item">
+                            <input type="text" name="ssnit_number" autocomplete="off" placeholder="SSNIT Number">
+                            <span><i class="fas fa-user-alt"></i></span>
                         </div>
 
-                         <div class="form-item">
-                        <input type="text" name="salary" autocomplete="off" placeholder="Salary">
-                        <span><i class="fas fa-cedi-sign" ></i></span>
+                        <div class="form-item">
+                            <input type="text" name="salary" autocomplete="off" placeholder="Salary">
+                            <span><i class="fas fa-cedi-sign"></i></span>
                         </div>
 
 
                         <div class="form-item">
                             <select name="gender" id="">
-                                <option value="">Select  gender</option>
+                                <option value="">Select gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
-                        <span><i class="fas fa-mars-double" ></i></span>
-                        </div>
-                        
-
-                         <div class="form-item">
-                        <input type="password" name="password" autocomplete="off" placeholder="Password">
-                        <span><i class="fas fa-lock" ></i></span>
-                        </div>
-
-                        <div class="form-item">
-                        <input type="password" name="confirm_password" autocomplete="off" placeholder="Confirm Password">
-                        <span><i class="fas fa-phone" ></i></span>
+                            <span><i class="fas fa-mars-double"></i></span>
                         </div>
 
 
                         <div class="form-item">
-                            <select>
+                            <input type="password" name="password" autocomplete="off" placeholder="Password">
+                            <span><i class="fas fa-lock"></i></span>
+                        </div>
+
+                        <div class="form-item">
+                            <input type="password" name="confirm_password" autocomplete="off"
+                                placeholder="Confirm Password">
+                            <span><i class="fas fa-phone"></i></span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <select name="course_id">
                                 <option value="">Select a course</option>
                                 <option value="">GRWD</option>
                                 <option value="">SE</option>
                                 <option value="">DBT</option>
                                 <option value="">HWR</option>
                             </select>
-                            <span><i class="fas fa-bookmark" ></i></span>
+                            <span><i class="fas fa-bookmark"></i></span>
                         </div>
 
 
                         <div class="form-item">
                             <input type="file" name="image" id="">
-                        <span><i class="fas fa-upload" ></i></span>
+                            <span><i class="fas fa-upload"></i></span>
                         </div>
 
                         <div class="form-item" id="form-submit">
@@ -255,23 +304,23 @@ if(!isset($_SESSION["email"]) && !isset($_SESSION['admin_id'])){
                         </div>
 
                     </div>
-                    </div>
-                </form>
             </div>
-
+            </form>
         </div>
 
-        
+    </div>
 
 
 
 
 
-  </div>
+
+
+</div>
 </div>
 
 
 
-    <?php 
+<?php 
     require_once 'admin_portal_footer.php';
     ?>

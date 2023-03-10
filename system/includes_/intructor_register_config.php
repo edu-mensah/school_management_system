@@ -9,7 +9,6 @@ require_once '../functions/functions.php';
 if (isset($_POST['register'])) {
 
    
-$instructor_id = '';
 $first_name = validate_text_input($_POST['first_name']);
 $last_name = validate_text_input($_POST['last_name']);
 $other_names = validate_text_input($_POST['other_names']);
@@ -35,14 +34,9 @@ $empty_field_error = "This field is empty";
 
 ##########################################
 
-    $new_instructor_data = 'instructor_id=' . $instructor_id . '&first_name=' . $first_name . '&last_name=' . $last_name . '&other_names=' . $other_names . '&email=' . $email . '&phone_number=' . $phone_number . '&gender=' . $gender . '&ssnit_number=' . $ssnit_number . '&salary=' . $salary . '&res_address=' . $res_address . '&course_id=' . $course_id;
+    $new_instructor_data =  'first_name=' . $first_name . '&last_name=' . $last_name . '&other_names=' . $other_names . '&email=' . $email . '&phone_number=' . $phone_number . '&gender=' . $gender . '&ssnit_number=' . $ssnit_number . '&salary=' . $salary . '&res_address=' . $res_address . '&course_id=' . $course_id;
 
-    if (empty($instructor_id)) {
-    header("Location: ../admin_portal_instructors.php?instructor_id_error=$empty_field_error&$new_instructor_data");
-    exit();
-
-    }
-
+    
     if (empty($first_name)) {
     header("Location: ../admin_portal_instructors.php?first_name_error=$empty_field_error&$new_instructor_data");
     exit();
@@ -150,10 +144,22 @@ $empty_field_error = "This field is empty";
 
     }
 
+    $password = password_hash($password,PASSWORD_DEFAULT);
+
+    $instructor_id = generate_account_id("IN",$course_id);
+
+
 
     $new_instructor_insert_query = "INSERT INTO `instructors`(`instructor_id`, `first_name`, `last_name`, `other_names`, `email`, `phone_number`, `birth_date`, `gender`, `ssnit_number`, `salary`, `res_address`, `pass_word`, `course_id`, `hire_date`) VALUES (:instructor_id,:first_name,:last_name,:other_names,:email,:phone_number,:birth_date,:gender,:ssnit,:salary,:res_address,:pass_word,:course_id,:hire_date)";
     
-
+    $stmt_instructor_insert = $DatabaseConnection->prepare($new_instructor_insert_query);
+    if ($stmt_instructor_insert->execute(["instructor_id" => $instructor_id, "first_name" => $first_name, "last_name" => $last_name, "other_names" => $other_names, "email" => $email, "phone_number" => $phone_number] )) {
+        header("Location: ../admin_portal_instructors.php?instructor_insert_succes=Instructor Registered");
+        exit();
+    } else {
+        header("Location: ../admin_portal_instructors.php?instructor_insert_error=something went wrong please try again&$new_instructor_data");
+        exit();
+    }
 
 
 

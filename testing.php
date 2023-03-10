@@ -34,3 +34,61 @@ echo '<br>';
 $date_var = implode('-',$arr_rev);
 
 echo $date_var;
+
+echo '<br>';
+echo mt_rand(1,999);
+echo '<br>';
+
+
+// function generate_account_id($account_type,$course_id){
+
+//     $year = substr(date("Y"),2);
+//     $random_number = rand(1,999);;
+//     $account_id = $account_type . $random_number . $course_id . $year;
+
+//     $defualt = "ST2GWD23";
+
+
+
+//     if (strtoupper($account_type) === "ST") {
+        
+//         if ($defualt === $account_id) {
+//             generate_account_id($account_type,$course_id);
+//             exit();
+//          }
+//     }
+
+
+
+//     if (strtoupper($account_type) === "IN") {
+
+//         if ($defualt === $account_id) {
+//             generate_account_id($account_type,$course_id);
+//             exit();
+//          }
+
+        
+//     }
+
+
+
+    // if (strtoupper($account_type) === "AD") {
+    //     $select_instructor_query = "SELECT * FROM a WHERE student_id = $account_id";
+    //     $stmt_instructor = $DatabaseConnection->prepare($select_instructor_query);
+    //     $stmt_instructor->execute();
+
+    //     if ($stmt_instructor->rowCount() > 0) {
+    //         generate_account_id($account_type,$course_id);
+    //         exit();
+    //      }
+    // }
+
+
+
+
+//     return $account_id;
+
+    
+// }
+
+// echo generate_account_id("ST","GWD");

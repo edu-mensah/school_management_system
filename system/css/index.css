@@ -15,8 +15,7 @@ a {
 }
 
 body {
-  background-image: url("../images/pictures/login_background.jpg");
-  /* background-color: #ff0000; */
+  background-image: url("../media/backgrounds/login_background.jpg");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,0 +1,29 @@
+.buttons-wrapper {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 20px;
+    border-bottom: #ff0000 2px solid;
+    padding: 10px;
+
+}
+
+.buttons-wrapper span {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.buttons-wrapper span a {
+    color: #ffffff;
+}
+
+.buttons-wrapper span:hover {
+    box-shadow: 0 0 20px #ff00007c;
+
+}

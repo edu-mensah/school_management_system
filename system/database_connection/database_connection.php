@@ -1,22 +1,28 @@
 <?php
-$severName = "localhost";
-$userName = "root";
-$password = "edu@root";
-$DBname = "school_management_system_DB";
 
-// $DBconn = mysqli_connect($severName, $userName, $password, $DBname);
-
-// if (!$DBconn) {
-//     die("Connection failed: " . mysqli_connect_error());
-// }
+class Database {
 
 
-$DSN = 'mysql:host='.$severName.';dbname='.$DBname;
+    private $severName = "localhost";
+    private $userName = "root";
+    private $password = "";
+    private $database_name = "school_management_system_DB";
+    private $connect;
 
+    // private $DSN = 'mysql:host='.$this->severName.';dbname='.$this->database_name;
 
-try {
-    $DatabaseConnection = new PDO($DSN,$userName,$password);
-} catch (PDOException $e) {
-    echo "Error!: " . $e->getMessage() . "<br>";
-    die();
+    public function connection(){
+
+        try {
+            $this->connect = new PDO('mysql:host='.$this->severName.';dbname='.$this->database_name,$this->userName,$this->password);
+            $this->connect->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $this->connect->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo "Error!: " . $e->getMessage() . "<br>";
+            die();
+        }
+
+        return $this->connect;
+    } 
+
 }

@@ -1,0 +1,83 @@
+.del-btn {
+    background: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1.2rem;
+}
+
+
+
+.instructor-form {
+    width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.form-title {
+    color: #ff0000;
+    border-bottom: 2px solid #ff0000;
+}
+
+.instructor-form form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-left-section-wrapper,
+.form-right-section-wrapper {
+    width: 45%;
+}
+
+
+.form-left-section-wrapper .form-item,
+.form-right-section-wrapper .form-item {
+    width: 100%;
+    background-color: #d4d4d4;
+    margin: 20px 0;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease-in;
+}
+
+.form-left-section-wrapper .form-item:hover,
+.form-right-section-wrapper .form-item:hover {
+    box-shadow: 0 0 20px#ff00003f;
+}
+
+.form-item input,
+.form-item input,
+.form-item select {
+    border: none;
+    outline: none;
+    background: none;
+    height: 35px;
+    width: 90%;
+    padding: 0 0 0 10px;
+    font-size: 1.2rem;
+}
+
+
+.change-course-form,
+.change-student-course-form,
+.change-student-batch-form {
+    width: 0px;
+    background-color: #000000b6;
+    border-radius: 10px;
+    margin: 20px auto;
+    position: absolute;
+    top: 200px;
+    right: 20px;
+    z-index: 10px;
+    color: #ffffff;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+
+.show-menu {
+    width: 500px;
+    padding: 20px;
+}

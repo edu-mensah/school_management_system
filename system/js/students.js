@@ -1,14 +1,14 @@
-const changeStudentCourseForm = document.querySelector(
+let changeStudentCourseForm = document.querySelector(
   ".change-student-course-form"
 );
-const changeStudentCourseBtn = document.querySelector(".change-student-course");
+let changeStudentCourseBtn = document.querySelector(".change-student-course");
 
 //
 
-const changeStudentBatchForm = document.querySelector(
+let changeStudentBatchForm = document.querySelector(
   ".change-student-batch-form"
 );
-const changeStudentBatchBtn = document.querySelector(".change-student-batch");
+let changeStudentBatchBtn = document.querySelector(".change-student-batch");
 
 //
 
@@ -18,8 +18,6 @@ changeStudentCourseBtn.addEventListener("click", () => {
     changeStudentBatchForm.classList.remove("show-menu");
   }
 });
-
-//
 
 //
 

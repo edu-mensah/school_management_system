@@ -1,4 +1,11 @@
 .student-form {
-    width: 500px;
-    margin: 20px auto;
+    width: 900px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px #00000033;
+        padding: 20px;
+        margin: 20px auto;
+    }
+.student-form form {
+    display: flex;
+    justify-content: space-between;
 }

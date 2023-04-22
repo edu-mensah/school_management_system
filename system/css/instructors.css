@@ -8,14 +8,17 @@
 
 
 .instructor-form {
-    width: 900px;
-    margin: 20px auto;
+    width: 1000px;
+        margin: 50px auto;
     padding: 20px;
+    border-radius: 10px;
+        box-shadow: 0 0 30px #00000033;
 }
 
 .form-title {
     color: #ff0000;
     border-bottom: 2px solid #ff0000;
+    margin-bottom: 10px;
 }
 
 .instructor-form form {
@@ -60,18 +63,38 @@
 }
 
 
+.input-label {
+    margin-bottom: -20px;
+    margin-left: 15px;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.form-error {
+    margin-top: -20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ff0000;
+}
 .change-course-form,
 .change-student-course-form,
-.change-student-batch-form {
+.change-student-batch-form,
+.change-fee-form,
+.change-class-time-form,
+.change-batch-instructor-form,
+.change-completion-date-form,
+.change-start-date-form,
+.change-completion-status-form {
     width: 0px;
-    background-color: #000000b6;
+    background-color: #ffffff;
+        box-shadow: 0 0 30px #00000033;
     border-radius: 10px;
     margin: 20px auto;
     position: absolute;
     top: 200px;
     right: 20px;
     z-index: 10px;
-    color: #ffffff;
+    color: #ff0000;
     transition: 0.3s ease-in-out;
     overflow: hidden;
 }

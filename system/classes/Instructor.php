@@ -32,43 +32,7 @@ class Instructor extends Person
         $this->course_id = $course_id;
         $this->profile_picture  = $profile_picture;
 
-
-        if (empty($this->last_name)) {
-            return 0;
-        }
-
-        if (empty($this->first_name)) {
-            return 1;
-        }
-
-        if (empty($this->email)) {
-            return 2;
-        }
-
-        if (!filter_var($this->email,FILTER_VALIDATE_EMAIL)) {
-            return 3;
-        }
-
-        if (empty($this->phone_number)) {
-            return 4;
-        }
-
-        if (empty($this->birth_date)) {
-            return 5;
-        }
-
-        if (empty($this->gender)) {
-            return 6;
-        }
-
-        if (empty($this->res_address)) {
-            return 7;
-        }
-
-        if (empty($this->profile_picture)) {
-            return 8;
-        }
-
+       
 
         $add_instructor_query = "INSERT INTO `instructors`(`instructor_id`, `last_name`, `first_name`, `other_names`, `email`, `phone_number`, `birth_date`, `gender`, `res_address`, `pass_word`, `hire_date`, `course_id`, `profile_picture`) VALUES (:instructor_id,:last_name,:first_name,:other_names,:email,:phone_number,:birth_date,:gender,:res_address,:pass_word,:hire_date,:course_id,:profile_picture);";
 
@@ -92,9 +56,6 @@ class Instructor extends Person
     public function delete_instructor($instructor_id){
         $instructor_id = trim($instructor_id);
 
-        if (empty($instructor_id)) {
-            return 0;
-        }
 
         $delete_query = "DELETE FROM instructors WHERE instructor_id = :instructor_id;";
         $stmt_delete = $this->connection->prepare($delete_query);
@@ -114,11 +75,10 @@ class Instructor extends Person
         public function view_all_instructors(){
         $view_all_query = "SELECT * FROM instructors;";
         $stmt_all = $this->connection->prepare($view_all_query);
-
-        if ($stmt_all->execute()) {
-            $instructors = $stmt_all->fetchAll();
-            return $instructors;
-        }
+        $stmt_all->execute();
+         
+        return $stmt_all;
+        
     }
 
 

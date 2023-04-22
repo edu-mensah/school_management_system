@@ -2,7 +2,10 @@
 .change-phone-wrapper {
     width: 600px;
     margin: 30px auto;
-    padding: 10px;
+    padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px #00000033;
+        color: #ff0000;
 
 
 }

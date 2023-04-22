@@ -101,65 +101,27 @@
                     <h3>COURSE</h3>
                     <h3>ACTION</h3>
                 </div>
-                <div class="list-item">
-                    <span class="picture"> <img src="../media/profile_pictures/<?= $_SESSION['profile_picture']; ?>" alt=""> </span>
-                    <span><?= $_SESSION['first_name']; ?></span>
-                    <span><?= $_SESSION['last_name']; ?></span>
-                    <span><?= $_SESSION['res_address']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span>
-                        <form action="" method="post">
-                            <input type="hidden" name="instructor_id" value="<?= $_SESSION['user_id']; ?>">
-                            <button type="submit" name="delete" class="del-btn" ><i class="fas fa-trash-alt" ></i></button>
-                        </form>
-                    </span>
-                </div>
-                <div class="list-item">
-                    <span class="picture"> <img src="../media/profile_pictures/<?= $_SESSION['profile_picture']; ?>" alt=""> </span>
-                    <span><?= $_SESSION['first_name']; ?></span>
-                    <span><?= $_SESSION['last_name']; ?></span>
-                    <span><?= $_SESSION['res_address']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span>
-                        <form action="" method="post">
-                            <input type="hidden" name="instructor_id" value="<?= $_SESSION['user_id']; ?>">
-                            <button type="submit" name="delete"><i class="fas fa-trash-alt" ></i></button>
-                        </form>
-                    </span>
-                </div>
-                <div class="list-item">
-                    <span class="picture"> <img src="../media/profile_pictures/<?= $_SESSION['profile_picture']; ?>" alt=""> </span>
-                    <span><?= $_SESSION['first_name']; ?></span>
-                    <span><?= $_SESSION['last_name']; ?></span>
-                    <span><?= $_SESSION['res_address']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span> <p class="del" ><i class="fas fa-trash-alt" ></i></p></span>
-                </div>
-                <div class="list-item">
-                    <span class="picture"> <img src="../media/profile_pictures/<?= $_SESSION['profile_picture']; ?>" alt=""> </span>
-                    <span><?= $_SESSION['first_name']; ?></span>
-                    <span><?= $_SESSION['last_name']; ?></span>
-                    <span><?= $_SESSION['res_address']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span><?= $_SESSION['phone_number']; ?></span>
-                    <span> <p class="del" ><i class="fas fa-trash-alt" ></i></p></span>
+                <?php foreach ($instructors as $instructor) { ?>
+                    <div class="list-item">
+                        <span class="picture"> <img src="../media/profile_pictures/<?= $instructor->profile_picture; ?>" alt=""> </span>
+                        <span><?= $instructor->instructor_id; ?></span>
+                        <span><?= ucwords($instructor->first_name); ?></span>
+                        <span><?= ucwords($instructor->last_name); ?></span>
+                        <span><?= ucwords($instructor->other_names); ?></span>
+                        <span><?= $instructor->email; ?></span>
+                        <span><?= $instructor->phone_number; ?></span>
+                        <span><?= $instructor->res_address; ?></span>
+                        <span><?= strtoupper($instructor->course_id); ?></span>
+                        <span>
+                            <form action="../configuration/delete_instructor.php" method="post">
+                                <input type="hidden" name="instructor_id" value="<?= $instructor->instructor_id; ?>">
+                                <button type="submit" name="delete" class="del-btn" ><i class="fas fa-trash-alt" ></i></button>
+                            </form>
+                        </span>
+                    </div>                   
+                <?php } ?>
 
-                </div>
+                
             </section>
 
 
@@ -168,63 +130,153 @@
 
             <section class="instructor-form" id="instructor-form" >
                     <h3 class="form-title" >Add Instructor</h3>
-                <form action="../configuration/instructor_configuration.php" method="post" enctype="multipart/form-data">
+                <form action="../configuration/add_instructor.php" method="post" enctype="multipart/form-data">
                     <div class="form-left-section-wrapper">
                         <!-- <div class="form-item">
                             <input type="text" name="instructor_id" autocomplete="off" placeholder="Instructor ID">
                             <span><i class="fas fa-star"></i></span>
                         </div> -->
 
-                        <div class="form-item">
-                            <input type="text" name="first_name" autocomplete="off" placeholder="First Name">
-                            <span><i class="fas fa-user-alt"></i></span>
-                        </div>
+                        <p class="input-label">First Name:</p>
+                        <?php if (isset($_GET['first_name_error'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="first_name" autocomplete="off" placeholder="First Name" value="<?= $_GET['first_name'] ?>">
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                            <p class="form-error"> <?= $_GET['first_name_error'] ?> </p>
+                        <?php } elseif (isset($_GET['first_name'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="first_name" autocomplete="off" placeholder="First Name" value="<?= $_GET['first_name'] ?>">
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="text" name="first_name" autocomplete="off" placeholder="First Name">
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                        <?php } ?>
 
-                        <div class="form-item">
-                            <input type="text" name="last_name" autocomplete="off" placeholder="Last Name">
-                            <span><i class="fas fa-user-alt"></i></span>
-                        </div>
+
+                        <p class="input-label">Last Name:</p>
+                        <?php if (isset($_GET['last_name_error'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="last_name" autocomplete="off" placeholder="Last Name" value="<?= $_GET['last_name'] ?>" >
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                            <p class="form-error"> <?= $_GET['last_name_error'] ?> </p>                            
+                        <?php } elseif (isset($_GET['last_name'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="last_name" autocomplete="off" placeholder="Last Name" value="<?= $_GET['last_name'] ?>" >
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="text" name="last_name" autocomplete="off" placeholder="Last Name">
+                                <span><i class="fas fa-user-alt"></i></span>
+                            </div>
+                        <?php }?>    
+                            
 
 
+                        <p class="input-label">Other Names:</p>
                         <div class="form-item">
                             <input type="text" name="other_names" autocomplete="off"
                                 placeholder="Other Names (optional)">
                             <span><i class="fas fa-user-alt"></i></span>
                         </div>
 
-                        <div class="form-item">
-                            <input type="text" name="email" autocomplete="off" placeholder="example@example.com">
-                            <span><i class="fas fa-envelope"></i></span>
-                        </div>
+                        <!--  -->
 
-                        <div class="form-item">
-                            <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752">
-                            <span><i class="fas fa-phone"></i></span>
-                        </div>
+                        <p class="input-label">Email:</p>
+                        <?php if (isset($_GET['email_error'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="email" autocomplete="off" placeholder="example@example.com" value="<?= $_GET['email'] ?>" >
+                                <span><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <p class="form-error"><?= $_GET['email_error']; ?></p>
+                        <?php } elseif (isset($_GET['email'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="email" autocomplete="off" placeholder="example@example.com" value="<?= $_GET['email'] ?>" >
+                                <span><i class="fas fa-envelope"></i></span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="text" name="email" autocomplete="off" placeholder="example@example.com">
+                                <span><i class="fas fa-envelope"></i></span>
+                            </div>
+                        <?php }?>
+                            
 
 
-                        <div class="form-item">
-                            <input type="date" name="birth_date" autocomplete="off" placeholder="Date of Birth">
-                            <span><i class="fas fa-calendar"></i></span>
-                        </div>
+                        <p class="input-label">Phone Number:</p>
+                        <?php if (isset($_GET['phone_number_error'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752" value="<?= $_GET['phone_number']; ?>" >
+                                <span><i class="fas fa-phone"></i></span>
+                            </div>
+                            <p class="form-error"><?= $_GET['phone_number_error'] ?></p>
+                        <?php } elseif (isset($_GET['phone_number'])) { ?>
+                            <div class="form-item">
+                                <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752" value="<?= $_GET['phone_number']; ?>" >
+                                <span><i class="fas fa-phone"></i></span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="text" name="phone_number" autocomplete="off" placeholder="0545458752" >
+                                <span><i class="fas fa-phone"></i></span>
+                            </div>
+                        <?php } ?>
 
 
+
+
+
+                        <p class="input-label">Birth Date:</p>
+                        <?php if (isset($_GET['birth_date_error'])) {?>
+                            <div class="form-item">
+                                <input type="date" name="birth_date" autocomplete="off" placeholder="Date of Birth"  >
+                                <span><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <p class="form-error"><?= $_GET['birth_date_error'] ?></p>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="date" name="birth_date" autocomplete="off" placeholder="Date of Birth">
+                                <span><i class="fas fa-calendar"></i></span>
+                            </div>
+                        <?php } ?>
+                        
+
+
+
+
+                        <p class="input-label">Residential Address:</p>
                         <div class="form-item">
                             <input type="text" name="res_address" autocomplete="off" placeholder="Residential Address">
                             <span><i class="fas fa-map-marker-alt"></i></span>
                         </div>
 
 
-                        <div class="form-item">
-                            <input type="date" name="hire_date" autocomplete="off" placeholder=" Hire Date">
-                            <span><i class="fas fa-calendar"></i></span>
-                        </div>
+                        <p class="input-label">Hire Date:</p>
+                        <?php if (isset($_GET['hire_date_error'])) { ?>
+                            <div class="form-item">
+                                <input type="date" name="hire_date" autocomplete="off" placeholder=" Hire Date">
+                                <span><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <p class="form-error"><?= $_GET['hire_date_error'] ?></p>
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="date" name="hire_date" autocomplete="off" placeholder=" Hire Date">
+                                <span><i class="fas fa-calendar"></i></span>
+                            </div>                            
+                        <?php }?>
+
                     </div>
 
                     <!--  -->
                     <div class="form-right-section-wrapper">
 
 
+                        <p class="input-label">Gender:</p>
                         <div class="form-item">
                             <select name="gender" id="">
                                 <option value="">Select gender</option>
@@ -234,26 +286,34 @@
                             <span><i class="fas fa-mars-double"></i></span>
                         </div>
 
-
+                        <p class="input-label">Course:</p>
                         <div class="form-item">
                             <select name="course_id">
                                 <option value="">Select a course</option>
-                                <option value="">GRWD</option>
-                                <option value="">SE</option>
-                                <option value="">DBT</option>
-                                <option value="">HWR</option>
+                                <?php foreach ($courses as $course) { ?>
+                                    <option value="<?= $course->course_id; ?>"><?= ucwords($course->course_title); ?></option>
+                                <?php } ?>
                             </select>
                             <span><i class="fas fa-book-reader"></i></span>
                         </div>
 
 
-                        <div class="form-item">
-                            <input type="file" name="profile_picture" id="">
-                            <span><i class="fas fa-upload"></i></span>
-                        </div>
+                        <p class="input-label">Profile Picture:</p>
+                        <?php if (isset($_GET['picture_error'])) { ?>
+                            <div class="form-item">
+                                <input type="file" name="profile_picture" id="">
+                                <span><i class="fas fa-upload"></i></span>
+                            </div>    
+                        <?php } else { ?>
+                            <div class="form-item">
+                                <input type="file" name="profile_picture" id="">
+                                <span><i class="fas fa-upload"></i></span>
+                            </div>    
+                        <?php } ?>
+                        
 
                         <div class="form-submit" id="form-submit">
-                            <input type="submit" name="add_intructor" value="REGISTER">
+                            <input type="submit" name="add_instructor" value="ADD INSTRUCTOR">
                         </div>
 
                     </div>
@@ -270,7 +330,7 @@
 
             <section class="change-course-form" id="change-course-form" >
                 <h3 class="" >Change Instructor Course</h3>
-                <form action="../configuration/instructor_configuration.php" method="post">
+                <form action="../configuration/change_instructor_course.php" method="post">
 
 
                         <!-- <div class="form-item">
@@ -280,12 +340,11 @@
                         </div> -->
 
                         <div class="form-item">
-                            <select name="course_id">
+                            <select name="instructor_id">
                                 <option value="">Select the Instructor</option>
-                                <option value="">Kwame Ana-bey</option>
-                                <option value="">Kofi Nyarko</option>
-                                <option value="">Kweku Mensah</option>
-                                <option value="">Lydia Mensah</option>
+                                <?php foreach ($instructors as $instructor) { ?>
+                                    <option value="<?= $instructor->instructor_id; ?>"><?= ucwords($instructor->first_name . ' ' . $instructor->last_name); ?></option>
+                                <?php } ?>
                             </select>
                             <span><i class="fas fa-users"></i></span>
                         </div>
@@ -295,10 +354,9 @@
                          <div class="form-item">
                             <select name="course_id">
                                 <option value="">Select a course</option>
-                                <option value="">GRWD</option>
-                                <option value="">SE</option>
-                                <option value="">DBT</option>
-                                <option value="">HWR</option>
+                                <?php foreach ($courses as $course) { ?>
+                                    <option value="<?= $course->course_id; ?>"><?= ucwords($course->course_title); ?></option>
+                                <?php } ?>
                             </select>
                             <span><i class="fas fa-book-reader"></i></span>
                         </div>

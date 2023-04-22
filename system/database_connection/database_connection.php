@@ -9,7 +9,7 @@ class Database {
     private $database_name = "school_management_system_DB";
     private $connect;
 
-    // private $DSN = 'mysql:host='.$this->severName.';dbname='.$this->database_name;
+    
 
     public function connection(){
 

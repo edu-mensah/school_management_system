@@ -27,13 +27,7 @@ class Notice
         $this->notice_picture = $notice_picture;
 
 
-        if (empty($this->notice_header)) {
-            return 0;
-        }
-        if (empty($this->notice_to)) {
-            return 1;
-        }
-
+       
 
         $create_notice_query = "INSERT INTO `notice`( `notice_header`, `notice_body`, `notice_picture`, `notice_by`, `notice_to`) VALUES (:notice_header,:notice_body,:notice_picture,:notice_by,:notice_to);";
         $stmt_create_notice = $this->connection->prepare($create_notice_query);
@@ -57,6 +51,8 @@ class Notice
         } else {
             return -1;
         }
+
+
     }
 
 
@@ -64,22 +60,16 @@ class Notice
     public function view_all_notice(){
         $select_all_query = "SELECT * FROM notice;";
         $stmt_all = $this->connection->prepare($select_all_query);
+        $stmt_all->execute();
+            
+        return $stmt_all;
 
-        if ($stmt_all->execute()) {
-            $notice = $stmt_all->fetchAll();
-            return $notice;
-        } else {
-            return-1;
-        }
+
     }
 
 
 
   
-
-
-
-
 
 
 

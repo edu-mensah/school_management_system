@@ -20,18 +20,6 @@ class Course
         $course_title = trim(strip_tags(htmlspecialchars($course_title)));
         $course_fee = trim(strip_tags(htmlspecialchars(doubleval($course_fee))));
 
-        if (empty($course_id)) {
-            return 0;
-        } 
-
-        if (empty($course_title)) {
-            return 1;
-        }
-
-        if (empty($course_fee)) {
-            return 2;
-        }
-
 
         $add_course_query = "INSERT INTO `courses`(`course_id`, `course_title`, `course_fee`) VALUES (:course_id,:course_title,:course_fee);";
         $stmt_add_course = $this->connection->prepare($add_course_query);
@@ -50,10 +38,6 @@ class Course
 
     public function change_course_fee($course_id,$course_fee){
         $course_fee = trim(intval($course_fee));
-
-        if (empty($course_fee)) {
-            return 0;
-        } 
 
         $change_fee_query = "UPDATE courses SET course_fee = :course_fee WHERE course_id = :course_id;";
         $stmt_change_fee = $this->connection->prepare($change_fee_query);
@@ -85,13 +69,11 @@ class Course
     public function view_all_courses(){
         $select_all_query = "SELECT * FROM courses;";
         $stmt_all = $this->connection->prepare($select_all_query);
+        $stmt_all->execute();
 
-        if ($stmt_all->execute()) {
-            $courses = $stmt_all->fetchAll();
-            return $courses;
-        } else {
-            return-1;
-        }
+        return $stmt_all;
+
+        
     }
  
 

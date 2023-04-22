@@ -45,3 +45,18 @@ dashboardTime.textContent = `${daysOfTheWeek[dayofTheWeek]}, ${dayOfTheMonth} ${
 // toggle
 
 //
+
+
+
+// 
+// let sBox = document.querySelector('.s-message-box');
+// let eBox = document.querySelector('.e-message-box');
+
+// if (sBox.textContent =! '') {
+//   sBox.classList.add('box-pop')
+// }
+
+
+// if ((eBox.textContent =! "")) {
+//   eBox.classList.add("box-pop");
+// }

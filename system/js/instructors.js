@@ -1,5 +1,5 @@
-const changeCourseForm = document.querySelector(".change-course-form");
-const changeInstructorCourseBtn = document.querySelector(
+let changeCourseForm = document.querySelector(".change-course-form");
+let changeInstructorCourseBtn = document.querySelector(
   ".change-instructor-course"
 );
 

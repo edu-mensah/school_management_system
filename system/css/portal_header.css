@@ -60,3 +60,24 @@ ul {
 .logout-wrapper a:hover {
     color: #c7c7c7;
 }
+.s-message-box,
+.e-message-box {
+    position: absolute;
+    top: -50px;
+    right: 50%;
+    z-index: 100;
+    box-shadow: 0 0 30px #fcfcfc54;
+    background-color: #095802;
+    color: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.e-message-box {
+    background-color: #ff0000;
+}
+
+.box-pop {
+    padding: 10px;
+    top: 20px;
+}

@@ -69,13 +69,13 @@ include_once('../includes/portal_header.php');
             
             <!--  -->
             <div class="buttons-wrapper">
-                <span class="add-book">
+                <span class="set-exams">
                     <i class="fas fa-plus" ></i>
-                    ADD BOOK
+                    SET EXAMS/QUIZ
                 </span>
-                <span class="change-student-course">
+                <span class="take-exams">
                     <i class="fas fa-edit" ></i>
-                    INCREASE BOOK QUANTITY 
+                    TAKE EXAMS/QUIZ 
                 </span>
             </div>
 

@@ -2,6 +2,8 @@
 
     include_once('../includes/portal_header.php');
 
+
+
 ?>
 
 
@@ -70,48 +72,91 @@
             </div>
             <div class="dashboard-card-wrapper">
                 <div class="">
-                    <p class="number">0</p>
+                    <p class="number"><?= $number_of_instructors;?></p>
                     <p class="text">INSTRUCTORS</p>
                 </div>
                 <div class="light-blue">
-                    <p class="number">0</p>
+                    <p class="number"><?= $number_of_students;?></p>
                     <p class="text">STUDENTS</p>
                 </div>
                 <div class="green">
-                    <p class="number">0</p>
+                    <p class="number"><?= $number_of_courses;?></p>
                     <p class="text">COURSES</p>
                 </div>
                 <div class="red">
-                    <p class="number">0</p>
+                    <p class="number"><?= $number_of_batches;?></p>
                     <p class="text">BATCHES</p>
                 </div>
-                <div class="purple">
-                    <p class="number">0</p>
-                    <p class="text">CLASSES</p>
-                </div>
                 <div class="red">
-                    <p class="number">0</p>
+                    <p class="number">
+                        <?php foreach ($books_in_stock as $stock) {
+                            echo $stock === NULL ? 0 : $stock;
+                        }?>
+                    </p>
                     <p class="text">BOOKS IN STOCK</p>
                 </div>
-                <div class="green">
-                    <p class="number">GHc 4050.00</p>
-                    <p class="text">FEES OWED</p>
-                </div>
                 <div class="purple">
-                    <p class="number"> GHc 8022.24</p>
+                    <p class="number">
+                        GHc 
+                        <?php foreach ($paid_fees as $amount_paid) {
+                            echo $amount_paid === NULL ? 0 : $amount_paid;
+                        }?>
+                    </p>
                     <p class="text">FEES PAID</p>
                 </div>
+                <div class="green">
+                    <p class="number">
+                        GHc 
+                        <?php foreach ($owed_fees as $fee_amount) {
+                             $fee_amount === NULL ? $fee_amount = 0 : $fee_amount = $fee_amount - $amount_paid;
+                        } 
+
+                        echo $fee_amount;
+                        
+                        ?>
+                    </p>
+                    <p class="text">FEES OWED</p>
+                </div>
+                
                  <div class="light-blue">
-                    <p class="number">0</p>
+                    <p class="number">
+                        <?php foreach ($female_students as $females) {
+                            echo $females === NULL ? 0 : $females;
+                        }?>
+                    </p>
                     <p class="text">FEMALE STUDENTS</p>
                 </div>
                  <div class="">
-                    <p class="number">0</p>
+                    <p class="number">
+                        <?php foreach ($female_students as $females) {
+                            echo $females === NULL ? $number_of_students - 0 :  $number_of_students - $females;
+                        }?>
+                    </p>
                     <p class="text">MALE STUDENTS</p>
                 </div>
             </div>
 
-            
+            <!--  -->
+
+
+            <section class="charts">
+                <div class="pie-chart">
+
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--  -->
 
             
         </div>
@@ -120,7 +165,11 @@
 
 
 
-  </div>
+    </div>
+
+
+      
+
 </div>
 
 

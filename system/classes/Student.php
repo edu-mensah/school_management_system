@@ -23,7 +23,7 @@ class Student extends Person
 
 
 
-    public function add_student($student_id,$last_name,$first_name,$other_names,$email,$phone_number,$birth_date,$gender,$res_address,$hire_date,$course_id,$profile_picture,$guardian_name,$guardian_contact,$batch_id,$password = 'st12345' ){
+    public function add_student($student_id,$last_name,$first_name,$other_names,$email,$phone_number,$birth_date,$gender,$res_address,$course_id,$profile_picture,$guardian_name,$guardian_contact,$batch_id,$password = 'stu12345' ){
         
         $this->student_id = $student_id;
         $this->last_name = $this->sanitize_input($last_name);
@@ -35,49 +35,12 @@ class Student extends Person
         $this->gender = $this->sanitize_input($gender);
         $this->res_address = $this->sanitize_input($res_address);
         $this->password = password_hash($password,PASSWORD_DEFAULT);
-        $this->hire_date = $this->sanitize_input($hire_date);
         $this->course_id = $course_id;
         $this->batch_id = $batch_id;
         $this->profile_picture  = $this->sanitize_input($profile_picture);
         $this->guardian_name  = $this->sanitize_input($guardian_name);
         $this->guardian_contact  = $this->sanitize_input($guardian_contact);
 
-
-        if (empty($this->last_name)) {
-            return 0;
-        }
-
-        if (empty($this->first_name)) {
-            return 1;
-        }
-
-        if (empty($this->email)) {
-            return 2;
-        }
-
-        if (!filter_var($this->email,FILTER_VALIDATE_EMAIL)) {
-            return 3;
-        }
-
-        if (empty($this->phone_number)) {
-            return 4;
-        }
-
-        if (empty($this->birth_date)) {
-            return 5;
-        }
-
-        if (empty($this->gender)) {
-            return 6;
-        }
-
-        if (empty($this->res_address)) {
-            return 7;
-        }
-
-        if (empty($this->profile_picture)) {
-            return 8;
-        }
 
 
         $add_student_query = "INSERT INTO `students`(`student_id`, `last_name`, `first_name`, `other_names`, `email`, `phone_number`, `birth_date`, `gender`, `res_address`, `pass_word`, `guardian_name`, `guardian_contact`, `batch_id`, `course_id`, `profile_picture`) VALUES (:student_id,:last_name,:first_name,:other_names,:email,:phone_number,:birth_date,:gender,:res_address,:pass_word,:guardian_name,:guardian_contact,:batch_id,:course_id,:profile_picture);";
@@ -100,9 +63,7 @@ class Student extends Person
         public function delete_student($student_id){
         $student_id = trim($student_id);
 
-        if (empty($student_id)) {
-            return 0;
-        }
+       
 
         $delete_query = "DELETE FROM students WHERE student_id = :student_id;";
         $stmt_delete = $this->connection->prepare($delete_query);
@@ -120,11 +81,29 @@ class Student extends Person
     public function view_all_students(){
         $view_all_query = "SELECT * FROM students;";
         $stmt_all = $this->connection->prepare($view_all_query);
+        $stmt_all->execute();
+            
+        return $stmt_all;
 
-        if ($stmt_all->execute()) {
-            $students = $stmt_all->fetchAll();
-            return $students;
-        }
+
+    }
+
+
+    public function view_fee_total(){
+        $view_fee_query = "SELECT SUM(course_fee) AS fees_owed FROM students,courses WHERE students.course_id = courses.course_id;";
+        $stmt = $this->connection->prepare($view_fee_query);
+        $stmt->execute();
+            
+        return $stmt->fetch();
+    }
+
+
+    public function view_female_students(){
+        $view_female_query = "SELECT COUNT(gender) AS females FROM students WHERE gender = 'female';";
+        $stmt = $this->connection->prepare($view_female_query);
+        $stmt->execute();
+            
+        return $stmt->fetch();        
     }
 
 
@@ -140,6 +119,8 @@ class Student extends Person
         } else {
             return -1;
         }
+
+
     }
 
 
@@ -153,6 +134,8 @@ class Student extends Person
         } else {
             return -1;
         }
+
+
     }
 
 

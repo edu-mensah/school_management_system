@@ -174,13 +174,10 @@ class Assessment
     public function view_all_assessments(){
         $select_query = "SELECT * FROM assessments;";
         $stmt_select = $this->connection->prepare($select_query);
+        $stmt_select->execute();
 
-        if($stmt_select->execute()){
-            $assessments = $stmt_select->fetchAll();
-            return $assessments;
-        }else {
-            return -1;
-        }
+        return $stmt_select;
+       
 
 
     }
@@ -192,13 +189,10 @@ class Assessment
 
         $select_query = "SELECT * FROM assessments WHERE student_id = $this->student_id AND module_id = $this->module_id ;";
         $stmt_select = $this->connection->prepare($select_query);
+        $stmt_select->execute();
 
-        if($stmt_select->execute()){
-            $assessments = $stmt_select->fetch();
-            return $assessments;
-        }else {
-            return -1;
-        }
+        return $stmt_select;
+       
     }
 
 

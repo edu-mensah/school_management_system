@@ -19,14 +19,7 @@ class Module
         $this->module_title = trim(htmlspecialchars($module_title));
         $this->course_id = trim(htmlspecialchars($course_id));
 
-        if (empty($module_id)) {
-            return 0;
-        } 
-
-        if ($module_title) {
-            return 1;
-        }
-
+        
 
         $add_module_query = "INSERT INTO `modules`(`module_id`, `module_tilte`, `course_id`) VALUES (:module_id,:module_title,':course_id);";
         $stmt_add_module = $this->connection->prepare($add_module_query);
@@ -59,18 +52,12 @@ class Module
     public function view_all_modules(){
         $select_all_query = "SELECT * FROM modules;";
         $stmt_all = $this->connection->prepare($select_all_query);
+        $stmt_all->execute();
 
-        if ($stmt_all->execute()) {
-            $modules = $stmt_all->fetchAll();
-            return $modules;
-        } else {
-            return-1;
-        }
+        return $stmt_all;
+
+
     }
-
-
-
-
 
 
 

@@ -22,13 +22,7 @@ class Person
         $new_password = trim(htmlspecialchars($new_password));
         $confirm_new_password = trim(htmlspecialchars($confirm_new_password));
 
-        if (empty($new_password)) {
-            return 0;
-        } elseif (empty($confirm_new_password)) {
-            return 1;
-        } elseif ($new_password != $confirm_new_password) {
-            return 2;
-        }
+      
 
         $new_password = password_hash($new_password,PASSWORD_DEFAULT);
 
@@ -49,9 +43,7 @@ class Person
     public function change_phone_number($table,$email,$new_phone_number){
         $new_phone_number = trim(htmlspecialchars($new_phone_number));
 
-        if (empty($new_phone_number)) {
-            return 0;
-        }
+       
 
 
         $update_query = "UPDATE $table SET `phone_number` = :new_phone_number WHERE email = $email;";

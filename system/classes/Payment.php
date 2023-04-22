@@ -25,14 +25,7 @@ class Payment
         $this->amount = trim(doubleval($amount));
 
 
-        if (empty($this->amount)) {
-            return 0;
-        }
-
-        if (empty($this->date_paid)) {
-            return 1;
-        }
-
+        
 
         $record_payment_query = "INSERT INTO `payments`(`payment_id`, `student_id`, `recieved_by`, `date_paid`, `amount`) VALUES (:payment_id,:student_id,:recieved_by,:date_paid,:amount);";
         $stmt_record_payment = $this->connection->prepare($record_payment_query);
@@ -44,6 +37,17 @@ class Payment
         }
 
 
+
+
+    }
+
+
+    public function view_payment_total(){
+        $payment_query = "SELECT SUM(amount) AS paid_fees FROM payments;";
+        $stmt_payment = $this->connection->prepare($payment_query);
+        $stmt_payment->execute();
+
+        return $stmt_payment->fetch();
     }
 
 

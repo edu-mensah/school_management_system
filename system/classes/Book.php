@@ -20,13 +20,7 @@ class Book
         $this->book_title =trim($book_title);
         $this->quantity = trim(intval($quantity));
 
-        if ($this->book_id) {
-            return 0;
-        }
-
-        if ($this->book_title) {
-            return 1;
-        }
+        
 
 
         $add_book_query = "INSERT INTO `books`(`book_id`, `book_title`, `quantity`) VALUES (':book_id',:book_title,:quantity);";
@@ -45,9 +39,7 @@ class Book
     public function increase_book_quantity($book_id,$quantity){
         $quantity = trim(intval($quantity));
 
-        if (empty($quantity)) {
-            return 0;
-        }
+       
 
 
         $book_qty_query = "UPDATE books SET quantity = quantity + :quantity WHERE book_id = $book_id;";
@@ -58,6 +50,8 @@ class Book
         } else {
             return -1;
         }
+
+
     }
 
 
@@ -67,14 +61,21 @@ class Book
     public function view_all_books(){
         $select_all = "SELECT * FROM books;";
         $stmt_select_all = $this->connection->prepare($select_all);
+        $stmt_select_all->execute();
 
-        if ($stmt_select_all->execute()) {
-            $books = $stmt_select_all->fetchAll();
-            return $books;
-        } else {
-            return -1;
-        }
+        return $stmt_select_all;
+
     }
+
+
+     public function view_books_in_stock(){
+        $select = "SELECT SUM(quantity) AS book_stock FROM books;";
+        $stmt = $this->connection->prepare($select);
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+    }   
 
 
 

@@ -52,7 +52,8 @@
 
 .form-item input,
 .form-item input,
-.form-item select {
+.form-item select,
+.form-item textarea {
     border: none;
     outline: none;
     background: none;
@@ -62,6 +63,10 @@
     font-size: 1.2rem;
 }
 
+.form-item textarea {
+    height: 300px;
+    padding: 10px;
+}
 
 .input-label {
     margin-bottom: -20px;
@@ -84,7 +89,10 @@
 .change-batch-instructor-form,
 .change-completion-date-form,
 .change-start-date-form,
-.change-completion-status-form {
+.change-completion-status-form,
+.increase-quantity-form,
+.module-form,
+.notice-form {
     width: 0px;
     background-color: #ffffff;
         box-shadow: 0 0 30px #00000033;

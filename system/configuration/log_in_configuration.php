@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
     if ($stmt->rowCount() > 0) {
         $instructor_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!($instructor_data['pass_word'] == $password)) {
+        if (!password_verify($password,$instructor_data['pass_word'])) {
                 header("Location: ../../index.php?password_error=Wrong password.&$user_data");
                 exit();
             }
@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
         $admin_data = $stmt->fetch(PDO::FETCH_ASSOC);
         // !password_verify($password,$admin_data['pass_word'])
 
-        if (!($admin_data['pass_word'] == $password)) {
+        if (!password_verify($password,$admin_data['pass_word'])) {
                 header("Location: ../../index.php?password_error=Wrong password.&$user_data");
                 exit();
             }

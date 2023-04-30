@@ -104,32 +104,45 @@
 }
 
 .dashboard-card-wrapper {
-    font-size: 0.8rem;
+    font-size: 1rem;
     gap: 5px 15px;
     flex-wrap: wrap;
 }
 
 .dashboard-card-wrapper div {
-    color: #ffffff;
-        background-color: #ff0000;
-    width: 15%;
-    padding: 20px;
-        /* height: 90px; */
-        border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+display: flex;
+justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+overflow: hidden;
+    width: 18%;
+    color: #ff0000;
+    height: 120px;
+    border-radius: 10px;
+margin-bottom: 20px;
     box-shadow: 0 0 30px #00000033;
-        transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
         cursor: pointer;
 }
-.dashboard-card-wrapper div:hover {
+.card-icon {
+    width: 40%;
+    background-color: #ff0000;
+    font-size: 4rem;
+    text-align: center;
+    padding: 15px;
+    color: #ffffff;
+}
+
+.card-details {
+    width: 60%;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* .dashboard-card-wrapper div:hover {
 
     color: #000000;
         background-color: #ffffff;
-    }
+    */
 /* .dashboard-card-wrapper .light-blue {
     background-color: #028ae6;
 }
@@ -154,6 +167,9 @@
 
 .list {
     margin: 20px auto;
+    box-shadow: 0 0 15px #00000040;
+        padding: 10px;
+        border-radius: 10px;
 }
 
 
@@ -175,7 +191,7 @@
 
 .list-item {
     color: #000000;
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding: 5px;
 }
 

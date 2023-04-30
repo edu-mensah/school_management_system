@@ -39,16 +39,16 @@ let changeBatchCompletionStatusBtn = document.querySelector(
 changeClassTimeBtn.addEventListener("click", () => {
   changeClassTimeForm.classList.toggle("show-menu");
   if (changeBatchInstructorForm.classList.contains("show-menu")) {
-    changeBatchInstructorForm.classList.remove("show-menu");
+    changeBatchInstructorForm.classList.toggle("show-menu");
   }
   if (changeBatchStartDateForm.classList.contains("show-menu")) {
-    changeBatchStartDateForm.remove("show-menu");
+    changeBatchStartDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionDateForm.classList.contains("show-menu")) {
-    changeBatchCompletionDateForm.remove("show-menu");
+    changeBatchCompletionDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionStatusForm.classList.contains("show-menu")) {
-    changeBatchCompletionStatusForm.remove("show-menu");
+    changeBatchCompletionStatusForm.toggle("show-menu");
   }
 });
 
@@ -59,16 +59,16 @@ changeClassTimeBtn.addEventListener("click", () => {
 changeBatchInstructorBtn.addEventListener("click", () => {
   changeBatchInstructorForm.classList.toggle("show-menu");
   if (changeClassTimeForm.classList.contains("show-menu")) {
-    changeClassTimeForm.classList.remove("show-menu");
+    changeClassTimeForm.classList.toggle("show-menu");
   }
   if (changeBatchStartDateForm.classList.contains("show-menu")) {
-    changeBatchStartDateForm.remove("show-menu");
+    changeBatchStartDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionDateForm.classList.contains("show-menu")) {
-    changeBatchCompletionDateForm.remove("show-menu");
+    changeBatchCompletionDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionStatusForm.classList.contains("show-menu")) {
-    changeBatchCompletionStatusForm.remove("show-menu");
+    changeBatchCompletionStatusForm.toggle("show-menu");
   }
 });
 
@@ -77,16 +77,16 @@ changeBatchInstructorBtn.addEventListener("click", () => {
 changeBatchStartDateBtn.addEventListener("click", () => {
   changeBatchStartDateForm.classList.toggle("show-menu");
   if (changeClassTimeForm.classList.contains("show-menu")) {
-    changeClassTimeForm.classList.remove("show-menu");
+    changeClassTimeForm.classList.toggle("show-menu");
   }
   if (changeBatchInstructorForm.classList.contains("show-menu")) {
-    changeBatchInstructorForm.remove("show-menu");
+    changeBatchInstructorForm.toggle("show-menu");
   }
   if (changeBatchCompletionDateForm.classList.contains("show-menu")) {
-    changeBatchCompletionDateForm.remove("show-menu");
+    changeBatchCompletionDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionStatusForm.classList.contains("show-menu")) {
-    changeBatchCompletionStatusForm.remove("show-menu");
+    changeBatchCompletionStatusForm.toggle("show-menu");
   }
 });
 
@@ -95,16 +95,16 @@ changeBatchStartDateBtn.addEventListener("click", () => {
 changeBatchCompletionDateBtn.addEventListener("click", () => {
   changeBatchCompletionDateForm.classList.toggle("show-menu");
   if (changeClassTimeForm.classList.contains("show-menu")) {
-    changeClassTimeForm.classList.remove("show-menu");
+    changeClassTimeForm.classList.toggle("show-menu");
   }
   if (changeBatchInstructorForm.classList.contains("show-menu")) {
-    changeBatchInstructorForm.remove("show-menu");
+    changeBatchInstructorForm.toggle("show-menu");
   }
   if (changeBatchStartDateForm.classList.contains("show-menu")) {
-    changeBatchStartDateForm.remove("show-menu");
+    changeBatchStartDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionStatusForm.classList.contains("show-menu")) {
-    changeBatchCompletionStatusForm.remove("show-menu");
+    changeBatchCompletionStatusForm.toggle("show-menu");
   }
 });
 
@@ -112,15 +112,15 @@ changeBatchCompletionDateBtn.addEventListener("click", () => {
 changeBatchCompletionStatusBtn.addEventListener("click", () => {
   changeBatchCompletionStatusForm.classList.toggle("show-menu");
   if (changeClassTimeForm.classList.contains("show-menu")) {
-    changeClassTimeForm.classList.remove("show-menu");
+    changeClassTimeForm.classList.toggle("show-menu");
   }
   if (changeBatchInstructorForm.classList.contains("show-menu")) {
-    changeBatchInstructorForm.remove("show-menu");
+    changeBatchInstructorForm.toggle("show-menu");
   }
   if (changeBatchStartDateForm.classList.contains("show-menu")) {
-    changeBatchStartDateForm.remove("show-menu");
+    changeBatchStartDateForm.toggle("show-menu");
   }
   if (changeBatchCompletionDateForm.classList.contains("show-menu")) {
-    changeBatchCompletionDateForm.remove("show-menu");
+    changeBatchCompletionDateForm.toggle("show-menu");
   }
 });

@@ -22,30 +22,38 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li> 
-                        <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-user-graduate"></i> <a href="students.php">Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php"> Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li id="active-link">
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="fees.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
-                    <li>
-                         <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
-                    </li>
+                    <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                        <li>
+                            <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        </li>
+                    <?php } ?>
                     <li>
                          <span><i class="fas fa-bullhorn"></i> <a href="notice.php"> Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span><i class="fas fa-percent"></i> <a href="exams.php"> Exams and Quiz</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-check-double"></i> <a href="assessments.php"> Assessments</a></span></i>
                     </li>
@@ -68,6 +76,10 @@ include_once('../includes/portal_header.php');
             </div>
             
             <!--  -->
+
+
+            <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
+            
             <div class="buttons-wrapper">
                 <span class="add-batch">
                     <a href="#batch-form">
@@ -105,6 +117,7 @@ include_once('../includes/portal_header.php');
             <!--  -->
 
             <section class="list">
+                <h2>BATCHES</h2>
                 <div class="list-header">
                     <h3>BATCH ID</h3>
                     <h3>BATCH NAME</h3>
@@ -426,6 +439,54 @@ include_once('../includes/portal_header.php');
                    
                 </form>
             </section>
+
+            <?php } elseif (strtolower($_SESSION['account_type']) == 'instructor') { 
+            $ins_id = $_SESSION['user_id'];
+
+            // batches
+            $inst_batch_query = "SELECT * FROM `batches` WHERE instructor_id = :instructor_id;";
+
+            $stmt_inst_batch = $connection->prepare($inst_batch_query);
+            $stmt_inst_batch->execute(['instructor_id' => $ins_id]);
+            $inst_batches = $stmt_inst_batch->fetchAll();
+            $inst_number_of_batches = $stmt_inst_batch->rowCount();
+            
+            
+            
+            ?>
+
+
+            <!-- Batches -->
+
+            <section class="list">
+                <h2>BATCHES</h2>
+                <div class="list-header">
+                    <h3>BATCH ID</h3>
+                    <h3>BATCH NAME</h3>
+                    <h3>START DATE</h3>
+                    <h3>COMPLETION DATE</h3>
+                    <h3>CLASS TIME</h3>
+                    <h3>COMPLETION STATUS</h3>
+                </div>
+                <?php foreach ($inst_batches as $batch) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($batch->batch_id); ?></span>
+                        <span><?= ucwords($batch->batch_name); ?></span>
+                        <span><?= $batch->start_date; ?></span>
+                        <span><?= $batch->completion_date; ?></span>
+                        <span><?= $batch->class_time; ?></span>
+                        <span><?= strtoupper($batch->completion_status); ?></span>
+                    </div>                   
+                <?php } ?>
+
+                
+            </section>
+
+
+        <?php } ?>
+            <!--  -->
+
+
 
 
 

@@ -22,30 +22,38 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li id="active-link"> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php"> Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php"> Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="fees.php"> Fees and Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span><i class="fas fa-bullhorn"></i> <a href="notice.php"> Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span><i class="fas fa-percent"></i> <a href="exams.php"> Exams and Quiz</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-check-double"></i> <a href="assessments.php"> Assessments</a></span></i>
                     </li>
@@ -68,6 +76,8 @@ include_once('../includes/portal_header.php');
             </div>
             
             <!--  -->
+            <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
+                
             
             <div class="buttons-wrapper">
                 <span class="add-student">
@@ -88,6 +98,7 @@ include_once('../includes/portal_header.php');
             <!--  -->
 
              <section class="list">
+                <h2>STUDENTS</h2>
                 <div class="list-header">
                     <h3>IMAGE</h3>
                     <h3>ID</h3>
@@ -350,6 +361,61 @@ include_once('../includes/portal_header.php');
                    
                 </form>
             </section>
+
+
+            <?php } elseif (strtolower($_SESSION['account_type']) == 'instructor') { 
+            $ins_id = $_SESSION['user_id'];
+
+            // studemts
+            $inst_student_query = "SELECT * FROM `students` ,`batches` WHERE students.batch_id = batches.batch_id AND instructor_id = :instructor_id;";
+            $stmt_inst_student = $connection->prepare($inst_student_query);
+            $stmt_inst_student->execute(['instructor_id' => $ins_id]);
+            $inst_students = $stmt_inst_student->fetchAll();
+            $inst_number_of_students = $stmt_inst_student->rowCount();
+
+            
+            ?>
+
+            <section class="list">
+                <h2>STUDENTS</h2>
+                <div class="list-header">
+                    <h3>IMAGE</h3>
+                    <h3>ID</h3>
+                    <h3>FIRST NAME</h3>
+                    <h3>LAST NAME</h3>
+                    <h3>OTHER NAMES</h3>
+                    <h3>EMAIL</h3>
+                    <h3>PHONE</h3>
+                    <h3>BATCH</h3>
+                </div>
+                <?php foreach ($inst_students as $student) { ?>
+                    <div class="list-item">
+                        <span class="picture"> <img src="../media/profile_pictures/<?= $student->profile_picture; ?>" alt=""> </span>
+                        <span><?= strtoupper($student->student_id); ?></span>
+                        <span><?= ucwords($student->first_name); ?></span>
+                        <span><?= ucwords($student->last_name); ?></span>
+                        <span><?= ucwords($student->other_names); ?></span>
+                        <span><?= $student->email; ?></span>
+                        <span><?= $student->phone_number; ?></span>
+                        <span><?= strtoupper($student->batch_id); ?></span>
+                    </div>  
+            
+                <?php } ?>
+            </section>
+
+
+
+
+        <?php } ?>
+
+
+
+
+
+
+
+
+            <!--  -->
 
             
             

@@ -1,0 +1,42 @@
+.sent-notice {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.notice-list {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 20px #00000036;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.notice-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0000;
+
+}
+
+.notice-body {
+    line-height: 1.6rem;
+    color: #3b3b3b;
+    margin: 10px 0;
+}
+
+.notice-by {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #777777;
+}
+
+.notice-del-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff0000;
+    cursor: pointer;
+    margin: 10px;
+}

@@ -22,6 +22,14 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
     include_once '../database_connection/connection_instance.php';
 
 
+
+     // administration
+    $admin_query = "SELECT * FROM administrator;";
+    $admin_stmt = $connection->prepare($admin_query);
+    $administrators = $admin_stmt->fetchAll();
+
+
+
     // instructors
     $instructor = new Instructor($connection);
     $instructor_stmt = $instructor->view_all_instructors();
@@ -41,6 +49,14 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
 
 
 
+    //assessments
+    $assessment_select = "SELECT * FROM assessments, students, modules WHERE assessments.student_id = students.student_id AND assessments.module_id = modules.module_id;";
+    $assessment_stmt = $connection->prepare($assessment_select);
+    $assessment_stmt->execute();
+    $assessments = $assessment_stmt->fetchAll();
+ 
+
+
     // courses
     $course = new Course($connection);
     $course_stmt = $course->view_all_courses();
@@ -55,14 +71,20 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
     $number_of_batches = $batch_stmt->rowCount();
 
 
+    // Modules
+    $module_query = "SELECT * FROM modules, courses WHERE modules.course_id = courses.course_id;";
+    $module_stmt = $connection->prepare($module_query);
+    $module_stmt->execute();
+    $modules = $module_stmt->fetchAll();
 
-     // payments
-    $payment = new Payment($connection);
-    $paid_fees = $payment->view_payment_total();
+
+
+     
 
     // books
     $book = new Book($connection);
-    $books = $book->view_all_books();
+    $book_stmt = $book->view_all_books();
+    $books = $book_stmt->fetchAll();
     $books_in_stock = $book->view_books_in_stock();
 
 
@@ -74,9 +96,18 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
     
 
 
+    // payments
+    $payment = new Payment($connection);
+    $paid_fees = $payment->view_payment_total();
+
+    // payments 
+    $payment_time_query = "SELECT * FROM students, payments, courses WHERE students.student_id = payments.student_id AND students.course_id = courses.course_id;";
+    $stmt_payment = $connection->prepare($payment_time_query);
+    $stmt_payment->execute();
+    $payments = $stmt_payment->fetchAll();
+
     
-
-
+    
 
 
 ?>
@@ -98,6 +129,9 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
     <link rel="stylesheet" href="../css/students.css?v=<?= time();?>">
     <link rel="stylesheet" href="../css/courses.css?v=<?= time();?>">
     <link rel="stylesheet" href="../css/batches.css?v=<?= time();?>">
+    <link rel="stylesheet" href="../css/payments.css?v=<?= time();?>">
+    <link rel="stylesheet" href="../css/books.css?v=<?= time();?>">
+    <link rel="stylesheet" href="../css/notice.css?v=<?= time();?>">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="../fontawesome/css/all.css">

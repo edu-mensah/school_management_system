@@ -1,13 +1,6 @@
 
 
-    <p class="s-message-box">
-    
-    </p>
-    <p class="e-message-box">
-    
-    </p>
-        <!-- <p class="s-message-box">The lives a dog</p> -->
-
+  
 
 
 
@@ -22,5 +15,7 @@
 <script src="../js/students.js"></script>
 <script src="../js/courses.js"></script>
 <script src="../js/batches.js"></script>
+<script src="../js/books.js"></script>
+<script src="../js/notice.js"></script>
 </body>
 </html>

@@ -22,30 +22,40 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <li>
-                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php"> Courses</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php"> Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
-                         <span><i class="fas fa-cedi-sign"></i> <a href="fees.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
+                         <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span><i class="fas fa-bullhorn"></i> <a href="notice.php"> Notice</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span><i class="fas fa-percent"></i> <a href="exams.php"> Exams and Quiz</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li id="active-link">
                          <span> <i class="fas fa-check-double"></i> <a href="assessments.php"> Assessments</a></span></i>
                     </li>
@@ -68,28 +78,90 @@ include_once('../includes/portal_header.php');
             </div>
             
             <!--  -->
-            <div class="buttons-wrapper">
-                <span class="record-quiz">
-                    <i class="fas fa-plus" ></i>
-                    RECORD QUIZ
-                </span>
-                <span class="record-quiz">
-                    <i class="fas fa-plus" ></i>
-                    RECORD EXAMS
-                </span>
-                <span class="change-quiz-marks">
-                    <i class="fas fa-edit" ></i>
-                    CHANGE QUIZ MARKS 
-                </span>
-                <span class="change-exams-marks">
-                    <i class="fas fa-edit" ></i>
-                    CHANGE EXAMS MARKS 
-                </span>
-            </div>
+            <?php if(strtolower($_SESSION['account_type']) == 'instructor') { ?>
+                <div class="buttons-wrapper">
+                    <span class="record-quiz">
+                        <i class="fas fa-plus" ></i>
+                        RECORD QUIZ
+                    </span>
+                    <span class="record-quiz">
+                        <i class="fas fa-plus" ></i>
+                        RECORD EXAMS
+                    </span>
+                    <span class="change-quiz-marks">
+                        <i class="fas fa-edit" ></i>
+                        CHANGE QUIZ MARKS 
+                    </span>
+                    <span class="change-exams-marks">
+                        <i class="fas fa-edit" ></i>
+                        CHANGE EXAMS MARKS 
+                    </span>
+                </div>
+            <?php } ?>
 
 
             <!--  -->
 
+            <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
+
+            <section class="list">
+                <h2>ASSESSMENTS</h2>
+                <div class="list-header">
+                    <h3>STUDENT</h3>
+                    <h3>MODULE</h3>
+                    <h3>QUIZ</h3>
+                    <h3>EXAMS</h3>
+                    <h3>GRADE</h3>
+                </div>
+                <?php foreach ($assessments as $assessment) { ?>
+                    <div class="list-item">
+                        <span><?= ucwords($assessment->first_name . ' ' . $assessment->last_name); ?></span>
+                        <span><?= ucfirst($assessment->module_title); ?></span>
+                        <span><?= $assessment->quiz_mark; ?></span>
+                        <span><?= $assessment->exams_mark; ?></span>
+                        <span><?= strtoupper($assessment->grade); ?></span>
+                    </div>                   
+                <?php } ?>
+            </section>
+
+            <?php } ?>
+            
+
+
+            <!--  -->
+            <?php if(strtolower($_SESSION['account_type']) == 'student') { 
+                $stu_id = $_SESSION['user_id'];
+
+                $student_assessment_select = "SELECT * FROM assessments, modules WHERE assessments.module_id = modules.module_id AND student_id = :student_id;";
+                $student_assessment_stmt = $connection->prepare($student_assessment_select);
+                $student_assessment_stmt->execute(['student_id' => $stu_id]);
+                $student_assessments = $student_assessment_stmt->fetchAll();
+                
+                ?>
+
+                <section class="list">
+                <h2>ASSESSMENTS</h2>
+                <div class="list-header">
+                    <h3>MODULE ID</h3>
+                    <h3>MODULE</h3>
+                    <h3>QUIZ</h3>
+                    <h3>EXAMS</h3>
+                    <h3>GRADE</h3>
+                </div>
+                <?php foreach ($student_assessments as $stu_assessment) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($stu_assessment->module_id); ?></span>
+                        <span><?= ucwords($stu_assessment->module_title); ?></span>
+                        <span><?= $stu_assessment->quiz_mark; ?></span>
+                        <span><?= $stu_assessment->exams_mark; ?></span>
+                        <span><?= strtoupper($stu_assessment->grade); ?></span>
+                    </div>                   
+                <?php } ?>
+            </section>
+
+
+
+            <?php } ?>
           
 
             <!--  -->

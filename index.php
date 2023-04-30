@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="system/media/icons/favicon.jpg" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPC porptal | Login</title>
+    <title>Portal | Login</title>
     <!-- custom css -->
     <link rel="stylesheet" href="system/css/index.css?v=<?= time();?>">
     <!-- fontawesome -->

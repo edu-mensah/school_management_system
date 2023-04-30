@@ -7,11 +7,11 @@ include_once('../functions/functions.php');
 
 if (isset($_POST['delete'])) {
 
-    $instructor_id = $_POST['course_id'];
+    $course_id = $_POST['course_id'];
 
 
-    $delete_instructor = "DELETE FROM courses WHERE course_id = :course_id;";
-    $stmt_del = $connection->prepare($delete_instructor);
+    $delete_course = "DELETE FROM courses WHERE course_id = :course_id;";
+    $stmt_del = $connection->prepare($delete_course);
 
 
 

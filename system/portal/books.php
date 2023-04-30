@@ -22,26 +22,30 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
-                        <span><i class="fas fa-user-graduate"></i> <a href="students.php">Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                        <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li id="active-link" >
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -76,6 +80,9 @@ include_once('../includes/portal_header.php');
             </div>
             
             <!--  -->
+
+        <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
+
             <div class="buttons-wrapper">
                 <span class="add-book">
                     <a href="#book-form">
@@ -243,6 +250,29 @@ include_once('../includes/portal_header.php');
                    
                 </form>
             </section>
+
+        <?php } elseif (strtolower($_SESSION['account_type']) == 'student') { ?>
+            
+
+            <section class="list">
+                <h2>BOOKS COLLECTED</h2>
+                <div class="list-header">
+                    <h3>BOOK ID</h3>
+                    <h3>BOOK TITLE</h3>
+                    <h3>QUANTITY</h3>
+                </div>
+                <?php foreach ($books as $book) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($book->book_id); ?></span>
+                        <span><?= ucwords($book->book_title); ?></span>
+                        <span><?= $book->quantity; ?></span>
+                    </div>                   
+                <?php } ?>
+
+                
+            </section>
+
+        <?php } ?>
 
           
 

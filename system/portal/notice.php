@@ -22,26 +22,30 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -93,7 +97,7 @@ include_once('../includes/portal_header.php');
                     <h2>SENT NOTICE</h2>
                     <?php 
                     $user_ID = $_SESSION['user_id'];
-                    $notice_sent_by = "SELECT * FROM notice WHERE notice_by = :user_ID ORDER BY notice_id;";
+                    $notice_sent_by = "SELECT * FROM notice WHERE notice_by = :user_ID ORDER BY notice_id DESC;";
                     $notice_sent_stmt = $connection->prepare($notice_sent_by);
                     $notice_sent_stmt->execute(['user_ID' => $user_ID]);
                     $all_notice_by = $notice_sent_stmt->fetchAll();
@@ -223,12 +227,62 @@ include_once('../includes/portal_header.php');
 
             <!--  -->
             <?php if(strtolower($_SESSION['account_type']) == 'instructor') { ?>
+
+                <section class="sent-notice">
+                    <!-- <h2>NOTICE</h2> -->
+                    <?php 
+                    $notice_sent_by = "SELECT * FROM notice WHERE notice_to = 'all instructors' ORDER BY notice_id DESC;";
+                    $notice_sent_stmt = $connection->prepare($notice_sent_by);
+                    $notice_sent_stmt->execute();
+                    $all_notice_by = $notice_sent_stmt->fetchAll();
+                    
+                    foreach ($all_notice_by as $notice) { ?>
+                    
+
+                    <div class="notice-list">
+                        <div>
+                            <p class="notice-header" ><?= ucwords($notice->notice_header); ?></p>
+                        <p class="notice-body"> <?= ucfirst($notice->notice_body) ?></p>
+                        <p class="notice-by">
+                            From Administration
+                        </p>
+                        </div>
+                        <!-- <form action="../configuration/delete_notice.php" method="post">
+                            <input type="hidden" value="<?= $notice->notice_id?>">
+                            <button type="submit" class="notice-del-btn" > <i class="fas fa-times" ></i> </button>
+                        </form> -->
+                    </div>
+                    <?php } ?>
+                </section>
                    
             <?php } ?>
 
           <!--  -->
 
-          <?php if(strtolower($_SESSION['account_type']) == 'student') { ?>
+          <?php if(strtolower($_SESSION['account_type']) == 'student') { 
+            $stu_batch_id = $_SESSION['batch_id'];
+            
+            ?>
+            <section class="sent-notice">
+                    <!-- <h2>NOTICE</h2> -->
+                    <?php 
+                    $notice_sent_by = "SELECT * FROM notice WHERE notice_to = 'all students' OR notice_to = :batch_id ORDER BY notice_id DESC;";
+                    $notice_sent_stmt = $connection->prepare($notice_sent_by);
+                    $notice_sent_stmt->execute(['batch_id' => $stu_batch_id]);
+                    $all_notice_by = $notice_sent_stmt->fetchAll();
+                    
+                    foreach ($all_notice_by as $notice) { ?>
+                    <div class="notice-list">
+                        <div>
+                            <p class="notice-header" ><?= ucwords($notice->notice_header); ?></p>
+                        <p class="notice-body"> <?= ucfirst($notice->notice_body) ?></p>
+                        <p class="notice-by">
+                            From Administration
+                        </p>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </section>
             
             <?php } ?>
 

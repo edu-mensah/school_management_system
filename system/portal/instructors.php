@@ -24,15 +24,16 @@
                         <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php">
                                 Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li id="active-link"> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <li>
-                        <span><i class="fas fa-user-graduate"></i> <a href="students.php">
-                                Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
+                    <li> 
+                        <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                         <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses</a></span>
                         <!-- <i class="fas fa-chevron-down"></i> -->
@@ -45,7 +46,7 @@
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -79,6 +80,7 @@
                 <p class="date-text"></p>
             </div>
 
+        <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
 
             <div class="buttons-wrapper">
                 <span class="add-instructor">
@@ -379,6 +381,11 @@
                    
                 </form>
             </section>
+
+            <?php } elseif (strtolower($_SESSION['account_type']) == 'student') { ?>
+                
+
+            <?php } ?>
 
 
 

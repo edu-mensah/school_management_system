@@ -22,26 +22,30 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li id="active-link">
                          <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -74,6 +78,10 @@ include_once('../includes/portal_header.php');
                 </p>
                 <p class="date-text"></p>
             </div>
+
+
+
+
             
             <!--  -->
 
@@ -386,6 +394,96 @@ include_once('../includes/portal_header.php');
 
             <!--  -->
 
+        <?php } elseif (strtolower($_SESSION['account_type']) == 'instructor') {  
+            $ins_id = $_SESSION['user_id'];
+            $ins_course = $_SESSION['course_id'];
+
+            // courses
+            $inst_course_query = "SELECT * FROM courses WHERE course_id = :course_id";
+            $inst_stmt_course = $connection->prepare($inst_course_query);
+            $inst_stmt_course->execute(['course_id' => $ins_course]);
+            $inst_courses = $inst_stmt_course->fetchAll();
+
+
+            // Modules
+            $inst_module_query = "SELECT * FROM modules WHERE course_id = :course_id;";
+            $inst_stmt_module = $connection->prepare($inst_module_query);
+            $inst_stmt_module->execute(['course_id' => $ins_course]);
+            $inst_modules = $inst_stmt_module->fetchAll();
+
+
+        ?>
+
+         <!--  -->
+
+            <section class="list">
+                <h2>MY COURSES</h2>
+                <div class="list-header">
+                    <h3>COURSE ID</h3>
+                    <h3>COURSE TITLE</h3>
+                </div>
+                <?php foreach ($inst_courses as $course) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($course->course_id); ?></span>
+                        <span><?= ucwords($course->course_title); ?></span>
+                    </div>                 
+                <?php } ?>
+
+            </section>
+
+
+
+
+            <!--  Modules -->
+            <section class="list">
+                <h2>MODULES</h2>
+                <div class="list-header">
+                    <h3>MODULE ID</h3>
+                    <h3>MODULE TITLE</h3>
+                </div>
+                <?php foreach ($inst_modules as $module) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($module->module_id); ?></span>
+                        <span><?= ucwords($module->module_title); ?></span>
+                    </div>                   
+                <?php } ?>
+
+            </section>
+            <!--  -->
+
+
+
+        <?php } elseif (strtolower($_SESSION['account_type']) == 'student') { 
+            $ins_course = $_SESSION['course_id'];
+
+            
+            $inst_module_query = "SELECT * FROM modules WHERE course_id = :course_id;";
+            $inst_stmt_module = $connection->prepare($inst_module_query);
+            $inst_stmt_module->execute(['course_id' => $ins_course]);
+            $inst_modules = $inst_stmt_module->fetchAll();
+            
+            ?>
+          
+
+            <!--  Modules -->
+            <section class="list">
+                <h2>MY MODULES</h2>
+                <div class="list-header">
+                    <h3>MODULE ID</h3>
+                    <h3>MODULE TITLE</h3>
+                </div>
+                <?php foreach ($inst_modules as $module) { ?>
+                    <div class="list-item">
+                        <span><?= strtoupper($module->module_id); ?></span>
+                        <span><?= ucwords($module->module_title); ?></span>
+                    </div>                   
+                <?php } ?>
+
+            </section>
+        
+        
+        
+        
         <?php } ?>
 
             <!--  -->

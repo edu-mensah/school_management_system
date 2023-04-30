@@ -28,9 +28,8 @@ class Batch
 
        
 
-        $create_batch_query = "INSERT INTO `batches`(`batch_id`, `batch_name`,`start_date`, `completion_date`, `instructor_id`,`class_time`,`completion_status`) VALUES (:batch_id.:batch_name,:startDate,:completion_date,:instructor_id, :class_time, :completion_status);";
+        $create_batch_query = "INSERT INTO `batches`(`batch_id`, `batch_name`,`start_date`, `completion_date`, `instructor_id`,`class_time`,`completion_status`) VALUES (:batch_id,:batch_name,:startDate,:completion_date,:instructor_id, :class_time, :completion_status);";
         $stmt_create_batch = $this->connection->prepare($create_batch_query);
-
         if ($stmt_create_batch->execute(['batch_id' => $this->batch_id, 'batch_name' => $batch_name ,'startDate' => $this->start_date, 'completion_date' => $this->completion_date, 'instructor_id' => $this->insructor_id, 'class_time' => $this->class_time, 'completion_status' => $this->completion_status])) {
             return true;
         } else {

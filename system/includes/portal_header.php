@@ -132,6 +132,7 @@ if(!isset($_SESSION["last_name"]) && !isset($_SESSION['email'])){
     <link rel="stylesheet" href="../css/payments.css?v=<?= time();?>">
     <link rel="stylesheet" href="../css/books.css?v=<?= time();?>">
     <link rel="stylesheet" href="../css/notice.css?v=<?= time();?>">
+    <link rel="stylesheet" href="../css/assessment.css?v=<?= time();?>">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="../fontawesome/css/all.css">

@@ -25,26 +25,30 @@
                     <li id="active-link">
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -248,27 +252,84 @@
             </section>
 
 
-        <?php } elseif (strtolower($_SESSION['account_type']) == 'student') { ?>
-                <div class="dashboard-card-wrapper">
-                <div class="">
-                    <span class="card-icon" > <i class="fas fa-user-graduate" ></i> </span>
-                    <span class="card-details"> 
-                        <p class="number"><?= $number_of_students;?></p>
-                        <p class="text">STUDENTS</p>
-                    </span>
-                </div>
-                
-                <div class="">
-                    <span class="card-icon" > <i class="fas fa-th" ></i> </span>
-                    <span class="card-details"> 
-                        <p class="number"><?= $number_of_batches;?></p>
-                        <p class="text">BATCHES</p>
-                    </span>
-                </div>
-                
+        <?php } elseif (strtolower($_SESSION['account_type']) == 'student') {
+            $stu_batch_id = $_SESSION['batch_id'];
+            $stu_id = $_SESSION['user_id'];
+
+
+            // student 
+            $select_stu = "SELECT email, phone_number FROM students WHERE student_id = :student_id;";
+            $stu_stmt = $connection->prepare($select_stu);
+            $stu_stmt->execute(['student_id' => $stu_id]);
+            $stu_info = $stu_stmt->fetch();
+
+            // batches
+            $stu_batch_query = "SELECT * FROM `batches` WHERE batch_id = :batch_id;";
+            $stmt_stu_batch = $connection->prepare($stu_batch_query);
+            $stmt_stu_batch->execute(['batch_id' => $stu_batch_id]);
+            $stu_batch = $stmt_stu_batch->fetch();
+
+            // colleagues
+            $select_other = "SELECT first_name, last_name FROM students WHERE batch_id = :batch_id;";
+            $other_stmt = $connection->prepare($select_other);
+            $other_stmt->execute(['batch_id' => $stu_batch_id]);
+            $other_infos = $other_stmt->fetchAll();
+
             
+            
+            ?>
+                <div class="dashboard-card-wrapper">
+                
+                <div class="">
+                    <span class="card-icon" > <i class="fas fa-calendar" ></i> </span>
+                    <span class="card-details"> 
+                        <p class="number"><?= $stu_batch->start_date;?></p>
+                        <p class="text">START DATE</p>
+                    </span>
+                </div>
+
+                <div class="">
+                    <span class="card-icon" > <i class="fas fa-calendar" ></i> </span>
+                    <span class="card-details"> 
+                        <p class="number"><?= $stu_batch->completion_date;?></p>
+                        <p class="text">COMPLETION DATE</p>
+                    </span>
+                </div>
                 
             </div>
+        
+
+        
+        <div class="student-dashboard-details">
+        
+            <!-- student personal info -->
+            <section class="student-info">
+                <h2>PERSONAL DETAILS</h2>
+                <ul>
+                    <li>STUDENT ID: <span><?= strtoupper($_SESSION['user_id']); ?></span> </li>
+                    <li>LAST NAME: <span><?= ucwords($_SESSION['last_name']); ?></span> </li>
+                    <li>FIRST NAME: <span><?= ucwords($_SESSION['first_name']); ?></span> </li>
+                    <li>OTHER NAMES: <span><?= ucwords($_SESSION['other_names']); ?></span> </li>
+                    <li>EMAIL: <span><?= strtolower($stu_info->email); ?></span> </li>
+                    <li>PHONE: <span><?= strtoupper($stu_info->phone_number); ?></span> </li>
+                    <li>BIRTH DATE: <span><?= strtoupper($_SESSION['birth_date']); ?></span> </li>
+                    <li>GENDER: <span><?= strtoupper($_SESSION['gender']); ?></span> </li>
+                    <li>ADDRESS: <span><?= strtoupper($_SESSION['res_address']); ?></span> </li>
+                    <li>GUARDIAN: <span><?= strtoupper($_SESSION['guardian_name']); ?></span> </li>
+                </ul>
+            </section>
+
+            <!-- colleagues -->
+            <section class="coll-info">
+                <h2>COLLEAGUES</h2>
+                <ul>
+                    <?php foreach ($other_infos as $stu) { ?>
+                        <li><?= ucwords($stu->first_name . ' ' . $stu->last_name); ?></li>
+                    <?php }?>
+                </ul>
+            </section>
+        </div>
+        
         <?php } ?>
 
 

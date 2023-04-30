@@ -22,26 +22,30 @@ include_once('../includes/portal_header.php');
                     <li>
                          <span><i class="fas fa-tachometer-alt"></i> <a href="portal.php"> Dashboard</a></span>
                     </li>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span> <i class="fas fa-users"></i> <a href="instructors.php"> Instructors</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'instructor' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li> 
                         <span><i class="fas fa-user-graduate"></i> <a href="students.php"> Students</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <li>
                          <span> <i class="fas fa-book-reader"></i> <a href="courses.php">Courses & Modules</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'instructor') { ?>
                     <li>
                          <span> <i class="fas fa-calendar-alt"></i> <a href="batches.php"> Batches</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
+                    <?php } ?>
                     <?php if(strtolower($_SESSION['account_type']) == 'student' || strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li id="active-link" >
                          <span><i class="fas fa-cedi-sign"></i> <a href="payments.php">Payments</a> </span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
                     <?php } ?>
-                    <?php if(strtolower($_SESSION['account_type']) == 'administrator' || strtolower($_SESSION['account_type']) == 'student') { ?>
+                    <?php if(strtolower($_SESSION['account_type']) == 'administrator') { ?>
                     <li>
                          <span><i class="fas fa-book"></i> <a href="books.php"> Books</a></span> <!-- <i class="fas fa-chevron-down"></i> -->
                     </li>
@@ -96,13 +100,13 @@ include_once('../includes/portal_header.php');
 
 
             <section class="list">
+                <h2>FEE PAYMENTS</h2>
                 <div class="list-header">
                     <h3>ID</h3>
                     <h3>STUDENT</h3>
                     <h3>RECIEVED BY</h3>
                     <h3>DATE PAID</h3>
                     <h3>AMOUNT</h3>
-                    <!-- <h3>BALANCE</h3> -->
                     <h3>ACTION</h3>
                 </div>
                 <?php foreach ($payments as $payment) { ?>
@@ -209,13 +213,39 @@ include_once('../includes/portal_header.php');
                 </form>
             </section>
 
+        <?php } elseif(strtolower($_SESSION['account_type']) == 'student') { 
+            $stu_id = $_SESSION['user_id'];
+
+            $payment_select = "SELECT * FROM payments WHERE student_id = :student_id;";
+            $stmt_stu_pay = $connection->prepare($payment_select);
+            $stmt_stu_pay->execute(['student_id' => $stu_id]);
+            $stu_pays = $stmt_stu_pay->fetchAll();
+
+            
+            ?>
+
+            <section class="list">
+                <h2>FEE PAYMENTS</h2>
+                <div class="list-header">
+                    <h3>ID</h3>
+                    <h3>RECIEVED BY</h3>
+                    <h3>DATE PAID</h3>
+                    <h3>AMOUNT</h3>
+                </div>
+                <?php foreach ($stu_pays as $payment) { ?>
+                    <div class="list-item">
+                        <span><?= $payment->payment_id; ?></span>
+                        <span><?= $payment->recieved_by; ?></span>
+                        <span><?= $payment->date_paid; ?></span>
+                        <span><?= $payment->amount; ?></span>
+    
+                    </div>                   
+                <?php } ?>
+
+                
+            </section>
+
         <?php } ?>
-            <!--  -->
-
-
-            <?php if(strtolower($_SESSION['account_type']) == 'student') { ?>
-
-            <?php } ?>
 
           
 

@@ -140,21 +140,6 @@
                     
                 </div>
 
-                <div class="">
-                    <span class="card-icon" > <i class="fas fa-cedi-sign" ></i> </span>
-                    <span class="card-details"> 
-                        <p class="number">
-                        GHc 
-                        <?php foreach ($owed_fees as $fee_amount) {
-                             $fee_amount === NULL ? $fee_amount = 0 : $fee_amount = $fee_amount - $amount_paid;
-                        } 
-                        echo $fee_amount;
-                        ?>
-                        </p>
-                        <p class="text">FEES OWED</p>
-                    </span>
-                    
-                </div>
                 
             </div>
 

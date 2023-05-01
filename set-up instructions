@@ -1,0 +1,18 @@
+Set up instructions to get it running
+
+1. install xampp 
+2. copy the folder (school_management_system) into htdoc folder inside xampp installation folder
+    PATH: Windows - C:/xampp/htdocs  linux - /opt/lampp/htdocs
+
+3. open the xampp control panel and start the apache and the mysql
+
+4. open the url localhost/phpmyadmin in your web browser and import the database in this folder (/school_management_system/Database) into phpmyadmin
+
+5. make sure the database name is 'school_management_system_DB'
+
+6. Enter the url localhost/school_management_system in your browser
+
+    logins:
+        Administrator: Email: nanaadwoa@gmail.com | Password: 123456789
+        Instructor:    Email: edu@gmail.com       | Password: edu@123456789
+        Student:       Email: bonney@gmail.com    | Password: stu12345

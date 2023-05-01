@@ -126,32 +126,6 @@ include_once('../includes/portal_header.php');
 
                 <!--  -->
 
-                <section class="list">
-                <h2>ASSESSMENTS</h2>
-                <div class="list-header">
-                    <h3>STUDENT</h3>
-                    <h3>MODULE</h3>
-                    <h3>QUIZ</h3>
-                    <h3>EXAMS</h3>
-                    <h3>GRADE</h3>
-                    <h3>ACTION</h3>
-                </div>
-                <?php foreach ($stu_assessments as $assessment) { ?>
-                    <div class="list-item">
-                        <span><?= ucwords($assessment->first_name . ' ' . $assessment->last_name); ?></span>
-                        <span><?= ucfirst($assessment->module_title); ?></span>
-                        <span><?= $assessment->quiz_mark; ?></span>
-                        <span><?= $assessment->exams_mark; ?></span>
-                        <span><?= strtoupper($assessment->grade); ?></span>
-                        <span>
-                            <form action="../configuration/delete_assessment.php" method="post">
-                                <input type="hidden" name="student_id" value="<?= $assessment->student_id; ?>">
-                                <button type="submit" name="delete" class="del-btn" ><i class="fas fa-trash-alt" ></i></button>
-                            </form>
-                        </span>
-                    </div>                   
-                <?php } ?>
-            </section>
 
 
 
@@ -159,59 +133,6 @@ include_once('../includes/portal_header.php');
             <!--  -->
 
 
-            <section class="assessment-form" id="assessment-time" >
-                <h3 class="" >Record Assessment</h3>
-                <form action="../configuration/record_assessment.php" method="post">
-
-                        <div class="form-item">
-                            <select name="student_id">
-                                <option value="">Select the student</option>
-                                <?php foreach ($ins_stus as $student) { ?>
-                                    <option value="<?= $student->student_id; ?>"><?= ucwords($student->first_name . ' ' . $student->last_name); ?></option>
-                                <?php } ?>
-                            </select>
-                            <span><i class="fas fa-users"></i></span>
-                        </div>
-
-                        <!--  -->
-
-                         <div class="form-item">
-                            <select name="module_id">
-                                <option value="">Select the module</option>
-                                <?php foreach ($modules_ins as $module) { ?>
-                                    <option value="<?= $module->module_id; ?>"><?= ucwords($module->module_title); ?></option>
-                                <?php } ?>
-                            </select>
-                            <span><i class="fas fa-book-open"></i></span>
-                        </div>
-
-                        <p class="input-label">Quiz mark:</p>
-                        <div class="form-item">
-                            <input type="text" name="quiz_mark" autocomplete="off" placeholder="Quiz mark" >
-                            <span><i class="fas fa-book"></i></span>
-                        </div>
-
-                        <!--  -->
-
-                        <p class="input-label">Exams mark:</p>
-                        <div class="form-item">
-                            <input type="text" name="exams_mark" autocomplete="off" placeholder="Exams mark" >
-                            <span><i class="fas fa-book"></i></span>
-                        </div>
-
-                        <!--  -->
-
-
-
-
-
-                        <div class="form-submit" id="form-submit">
-                            <input type="submit" name="record_assessment" value="RECORD ASSESSMENTS">
-                        </div>
-
-                   
-                </form>
-            </section>
 
 
 

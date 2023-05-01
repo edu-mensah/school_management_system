@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2023 at 06:54 AM
+-- Generation Time: May 01, 2023 at 12:44 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,7 +47,7 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`admin_id`, `last_name`, `first_name`, `other_name`, `email`, `phone_number`, `bith_date`, `gender`, `res_address`, `pass_word`, `hire_date`, `profile_picture`) VALUES
-('ad201-23', 'adwoa', 'nana', 'addy', 'nanaadwoa@gmail.com', '0545879632', '1997-06-15', 'female', 'ba 75 swedru', '$2y$10$ln74y6KEYENi/9iut2FHo.Z.YXp2m4xtHqUgteVHHDaiuYPsVLpzK', '2023-04-06', 'ad201-23.jpg');
+('ad201-23', 'adwoa', 'nana', 'addy', 'nanaadwoa@gmail.com', '0254785452', '1997-06-15', 'female', 'ba 75 swedru', '$2y$10$ln74y6KEYENi/9iut2FHo.Z.YXp2m4xtHqUgteVHHDaiuYPsVLpzK', '2023-04-06', 'ad201-23.jpg');
 
 -- --------------------------------------------------------
 
@@ -104,8 +104,11 @@ CREATE TABLE `batches` (
 --
 
 INSERT INTO `batches` (`batch_id`, `start_date`, `completion_date`, `instructor_id`, `completion_status`, `class_time`, `batch_name`) VALUES
-('bg1452', '2023-04-02', '2024-02-13', 'ins210-23', 'no', 'weekends 08am - 04pm', 'database 10 - 12'),
-('bg311-23', '2023-04-02', '2023-05-01', 'ins210-23', 'no', 'week days 10am - 12pm', 'graphics and web design 10 - 12');
+('bg1452', '2023-04-02', '2024-01-02', 'ins117-23', 'no', 'weekends 08am - 04pm', 'database 10 - 12'),
+('bg311-23', '2020-12-20', '2023-05-01', 'ins912-23', 'no', 'week days 10am - 12pm', 'graphics and web design 10 - 12'),
+('bg399-23', '2021-05-20', '2022-05-20', 'ins117-23', 'no', 'week days 08am - 10am', 'database'),
+('bg506-23', '2023-10-20', '2024-10-20', 'ins210-23', 'no', 'weekends 08am - 04pm', 'software engineering'),
+('bg679-23', '2023-10-02', '2024-10-02', 'ins807-23', 'yes', 'weekends 08am - 04pm', 'foundation 10 - 12');
 
 -- --------------------------------------------------------
 
@@ -124,8 +127,10 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`book_id`, `book_title`, `quantity`) VALUES
-('dbt 102', 'database concepts', 10),
-('gwd 142', 'introduction to graph design', 12);
+('dbadw2', 'oracle administration workshop 2', 9),
+('dbt 102', 'database concepts', 31),
+('gwd 142', 'introduction to graph design', 12),
+('ms41', 'microsoft office', 12);
 
 -- --------------------------------------------------------
 
@@ -144,7 +149,10 @@ CREATE TABLE `class_times` (
 
 INSERT INTO `class_times` (`class_id`, `class_time`) VALUES
 (1, 'week days 10am - 12pm'),
-(2, 'weekends 08am - 04pm');
+(2, 'weekends 08am - 04pm'),
+(3, 'week days 1pm - 3pm'),
+(4, 'week days 08am - 10am'),
+(5, 'week days 3pm - 5pm');
 
 -- --------------------------------------------------------
 
@@ -163,8 +171,11 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_title`, `course_fee`) VALUES
+('cs12', 'cyber security', 4200),
 ('dbt', 'database technology', 6500),
+('fnd', 'Foundation', 1250),
 ('gwd', 'graphics and web design', 4500),
+('hwe', 'hardware and networking', 4520),
 ('se', 'software enigneering', 4520);
 
 -- --------------------------------------------------------
@@ -194,8 +205,11 @@ CREATE TABLE `instructors` (
 --
 
 INSERT INTO `instructors` (`instructor_id`, `last_name`, `first_name`, `other_names`, `email`, `phone_number`, `birth_date`, `gender`, `res_address`, `pass_word`, `hire_date`, `course_id`, `profile_picture`) VALUES
-('ins117-23', 'mensah', 'edu', '', 'edu@gmail.com', '0214586932', '2000-10-10', 'male', 'SD 4751', '$2y$10$p6X5QxyL7tvvPDQ6alpQXOrJIvKZ2/kF6jQA0.rxp52TyCV/pH.Ri', '2020-10-10', 'dbt', 'ins117-23.jpg'),
-('ins210-23', 'sam', 'romio', 'kwame', 'romio@gmail.com', '024578965', '1999-02-12', 'male', 'CC - 1245', '123456789', '2023-04-07', NULL, 'ins210-23.jpg');
+('ins117-23', 'mensah', 'edu', '', 'edu@gmail.com', '0214586932', '2000-10-10', 'male', 'SD 4751', '$2y$10$th0kA53WVktiUsTAM9cwIubD8tXZJP7EupSy/55JcHt6xkCnAKH6e', '2020-10-10', 'dbt', 'ins117-23.jpg'),
+('ins210-23', 'sam', 'romio', 'kwame', 'romio@gmail.com', '024578965', '1999-02-12', 'male', 'CC - 1245', '123456789', '2023-04-07', NULL, 'ins210-23.jpg'),
+('ins807-23', 'mensah', 'lydia', 'abena', 'lydia@gmail.com', '0245896587', '1999-10-10', 'female', 'CA - 4582', '$2y$10$ZeIsFaK06tjBgfLjd29PKO508csG351jfToijWhvDsgU7w8l25q2W', '2020-10-10', 'gwd', 'ins807-23.jpg'),
+('ins912-23', 'eduful', 'seth', '', 'eduful@gmail.com', '0245879658', '2000-04-21', 'female', '', '$2y$10$.jRrGdxaURLgn1.PQiePKe5tc9gl1qzLenbjuGInPSuJueMl6/jWu', '2020-05-10', 'se', 'ins912-23.jpg'),
+('ins93-23', 'appiah', 'philip', 'yaw', 'appiahyaw@gmail.com', '0254785475', '1995-05-20', 'male', 'kwapro', '$2y$10$LXK8g5EiNjxK8.hoxcOziuJMaknLenol3un.UFzPMnTwuK9vEgIJ.', '2020-02-22', 'cs12', 'ins93-23.jpg');
 
 -- --------------------------------------------------------
 
@@ -214,6 +228,10 @@ CREATE TABLE `modules` (
 --
 
 INSERT INTO `modules` (`module_id`, `module_title`, `course_id`) VALUES
+('dtc14', 'database concepts', 'dbt'),
+('hwd102', 'introduction', 'hwe'),
+('int45', 'introduction to cyber security', 'cs12'),
+('msof', 'microsoft office suit', 'fnd'),
 ('orcl-a1', 'oracle administration workshop 1', 'dbt');
 
 -- --------------------------------------------------------
@@ -237,7 +255,8 @@ CREATE TABLE `notice` (
 
 INSERT INTO `notice` (`notice_id`, `notice_header`, `notice_body`, `notice_picture`, `notice_by`, `notice_to`) VALUES
 (1, 'courses registration', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque earum illum recusandae sed. Assumenda eveniet esse minus dignissimos, quae cumque reprehenderit nostrum rerum perspiciatis officiis laboriosam consectetur quam ratione consequatur autem eos provident harum aut ipsam mollitia omnis vitae aperiam? Libero consectetur aliquid, unde deserunt quam rem autem odit quae.', NULL, 'ad201-23', 'all students'),
-(2, 'Collection of books', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque earum illum recusandae sed. Assumenda eveniet esse minus dignissimos, quae cumque reprehenderit nostrum rerum perspiciatis officiis laboriosam consectetur quam ratione consequatur autem eos provident harum aut ipsam mollitia omnis vitae aperiam? Libero consectetur aliquid, unde deserunt quam rem autem odit quae.', NULL, 'ad201-23', 'all students');
+(2, 'Collection of books', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque earum illum recusandae sed. Assumenda eveniet esse minus dignissimos, quae cumque reprehenderit nostrum rerum perspiciatis officiis laboriosam consectetur quam ratione consequatur autem eos provident harum aut ipsam mollitia omnis vitae aperiam? Libero consectetur aliquid, unde deserunt quam rem autem odit quae.', NULL, 'ad201-23', 'all students'),
+(3, 'instructors meeting', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque earum illum recusandae sed. Assumenda eveniet esse minus dignissimos, quae cumque reprehenderit nostrum rerum perspiciatis officiis laboriosam consectetur quam ratione consequatur autem eos provident harum aut ipsam mollitia omnis vitae aperiam? Libero consectetur aliquid, unde deserunt quam rem autem odit q', NULL, 'ad201-23', 'all instructors');
 
 -- --------------------------------------------------------
 
@@ -259,7 +278,10 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`payment_id`, `student_id`, `recieved_by`, `date_paid`, `amount`, `balance`) VALUES
-(1, 'stu39-23', 'ad201-23', '2023-04-24', 1200, NULL);
+(1, 'stu39-23', 'ad201-23', '2023-04-24', 1200, NULL),
+(2, 'stu39-23', 'ad201-23', '2023-04-30', 2000, NULL),
+(3, 'stu144-23', 'ad201-23', '2023-04-30', 2500, NULL),
+(4, 'stu231-23', 'ad201-23', '2023-04-30', 1200, NULL);
 
 -- --------------------------------------------------------
 
@@ -290,8 +312,13 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `last_name`, `first_name`, `other_names`, `email`, `phone_number`, `birth_date`, `gender`, `res_address`, `pass_word`, `guardian_name`, `guardian_contact`, `batch_id`, `course_id`, `profile_picture`) VALUES
-('stu144-23', 'anag-bey', 'kwame', '', 'bey@gmail.com', '0245879658', '1990-10-10', 'male', 'CD - 4573', '$2y$10$eBht/wh/Set2Wri4nBiE0urD9LrU90GuLZd3RccqFaATwvnZsAHly', 'kweku bey', '0245784578', 'bg311-23', 'gwd', 'stu144-23.jpg'),
-('stu39-23', 'bonney', 'yaw', 'blay', 'yaw@gmail.com', '0245245802', '2000-10-10', 'male', 'CD 454', '$2y$10$gLTHPx1f5A3so52qZvDzA.Uwsc7FjT1V06t7TFlUHHqDJ05IQmtCu', 'kweku blay', '0242545875', 'bg1452', 'gwd', 'stu39-23.jpg');
+('stu110-23', 'bonney', 'philip', 'kweku', 'phil@gmail.com', '0254785468', '1995-02-20', 'male', 'winneba', '$2y$10$bkvuh.sBCo9NTzTfBy33Ne0xsGtR.gLQnZS.qlYVCymYjnZFX8PJi', 'mary bonney', '024586584', 'bg1452', 'dbt', 'stu110-23.jpeg'),
+('stu144-23', 'anag-bey', 'kwame', '', 'bey@gmail.com', '0245879658', '1990-10-10', 'male', 'CD - 4573', '$2y$10$eBht/wh/Set2Wri4nBiE0urD9LrU90GuLZd3RccqFaATwvnZsAHly', 'kweku bey', '0245784578', 'bg1452', 'dbt', 'stu144-23.jpg'),
+('stu231-23', 'koram', 'priscilla', 'yaa', 'priscy@gmail.com', '0245821548', '1998-08-20', 'female', 'benso', '$2y$10$HmUg1Ephy/y7.m8riBIEp.bPkXPQpECAYzqlJ6QESMZEyNtRLT7Ei', 'maame yaa', '02154854639', 'bg1452', 'dbt', 'stu231-23.jpg'),
+('stu39-23', 'bonney', 'yaw', 'blay', 'bonney@gmail.com', '0245245802', '2000-10-10', 'male', 'CD 454', '$2y$10$gLTHPx1f5A3so52qZvDzA.Uwsc7FjT1V06t7TFlUHHqDJ05IQmtCu', 'kweku blay', '0242545875', 'bg1452', 'gwd', 'stu39-23.jpg'),
+('stu619-23', 'blay', 'kofi', '', 'blay@gmail.com', '0256987452', '2000-06-23', 'male', 'duakwa', '$2y$10$klTq90/.KSfHRBZKGZh/0uqTE9e.W7MutJGNTVlOQ7OBELXvj6V06', 'yaw blay', '0214589658', 'bg399-23', 'dbt', 'stu619-23.jpg'),
+('stu896-23', 'appiah', 'kweku', '', 'appiah@gmail.com', '0245879658', '2000-12-02', 'male', 'swedru', '$2y$10$zH/vN/mkYAB8te8JCTpL9u5qdkfZe0CPkWYioe3WxiWATtfS5hjzK', 'Benjamin appiah', '0215458552', 'bg1452', 'dbt', 'stu896-23.jpg'),
+('stu996-23', 'gyan', 'kwame', '', 'gyan@gmail.com', '0245854524', '1994-12-23', 'male', 'CC - 45217', '$2y$10$Uri9Nkwizdp8q1AChv1Ac.bjFvPHn4NOlRYQxVab5UjBHXflqqqpi', 'grace gyan', '0245854785', 'bg1452', 'dbt', 'stu996-23.jpg');
 
 --
 -- Indexes for dumped tables
@@ -384,19 +411,19 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `class_times`
 --
 ALTER TABLE `class_times`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `notice`
 --
 ALTER TABLE `notice`
-  MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
